@@ -11,4 +11,10 @@ app.set("view engine","ejs");
 
 app.use(express.static(path.join(__dirname,'public')));
 
+app.get("/", function(req,res){
+    res.render("index", {title:"This is a title",message:"This is a message"});
+});
 
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+});
