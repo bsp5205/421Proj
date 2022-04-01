@@ -14,9 +14,11 @@
     }
     .item4 {
         grid-area: right;
-        height: 400px;
+        height: 450px;
     }
-
+    p{
+        padding-left: 2%;
+    }
     .grid-container {
         display: grid;
         grid-template-areas:
@@ -30,7 +32,7 @@
 
     .grid-container > div {
         background-color: rgb(242, 242, 242);
-        text-align: center;
+        text-align: left;
         font-size: 30px;
         border-color: black;
         border-style: solid;
@@ -42,24 +44,47 @@
         font-size: 16px;
         cursor: pointer;
         text-align: center;
-        margin-top: 2%;
         padding: 100px;
-        margin-right: 2%;
-        margin-left: 2%;
+        margin: 2%;
+    }
+    .blockRight {
+        display: block;
+        width: 96%;
+        background-color: darkgrey;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        margin: 2%;
+        padding: 30px;
     }
     .block:hover {
         background-color: #ddd;
         color: black;
     }
+    .blockRight:hover {
+        background-color: #ddd;
+        color: black;
+    }
 </style>
 <div class="grid-container">
-    <div class="item1">Trending</div>
-    <div class="item2">Left</div>
+    <div class="item1">
+        <p>Trending:</p>
+    </div>
+    <div class="item2">
+        <p>Ads</p>
+    </div>
     <div class="item3">
+        <p>From forums you watch:</p>
         <button class="block">Block Button</button>
         <button class="block">Block Button</button>
         <button class="block">Block Button</button>
         <button class="block">Block Button</button>
     </div>
-    <div class="item4">Right</div>
+    <div class="item4">
+        <p>Favorites:</p>
+        <button class="blockRight">Block Button</button>
+        <button class="blockRight">Block Button</button>
+        <button class="blockRight">Block Button</button>
+        <button class="blockRight">Block Button</button>
+    </div>
 </div>
