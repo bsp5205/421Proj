@@ -16,13 +16,10 @@
         grid-area: right;
         height: 450px;
     }
-    p{
-        padding-left: 2%;
-    }
+
     .grid-container {
         display: grid;
         grid-template-areas:
-            '. header header header header .'
             'menu main main main main right'
             'menu main main main main right';
         gap: 10px;
@@ -66,19 +63,20 @@
         color: black;
     }
 </style>
+
 <div class="grid-container">
-    <div class="item1">
-        <p>Trending:</p>
-    </div>
-    <div class="item2">
-        <p>Ads</p>
-    </div>
+    <div class="item2">Ads</div>
     <div class="item3">
-        <p>From forums you watch:</p>
-        <button class="block" onclick="window.location.href = 'http://localhost:3000/post_name'">Block Button</button>
-        <button class="block">Block Button</button>
-        <button class="block">Block Button</button>
-        <button class="block">Block Button</button>
+        <div>
+            <h1><%= title %></h1>
+            <p><%= post_content %></p>
+        </div>
+        <div>
+            <p>Comment 1</p>
+        </div>
+        <div>
+            <p>Comment 2</p>
+        </div>
     </div>
     <div class="item4">
         <p>Favorites:</p>
@@ -88,3 +86,5 @@
         <button class="blockRight">Block Button</button>
     </div>
 </div>
+
+

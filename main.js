@@ -12,10 +12,10 @@ app.set("view engine","ejs");
 app.use(express.static(path.join(__dirname,'public')));
 
 app.get("/", function(req,res){
-    res.render("index", {title:"This is a title",message:"This is a message"});
+    res.render("index", {title:"Home"});
 });
-app.get("/test", function(req,res){
-    res.render("test", {title:"This is a title",message:"This is a message"});
+app.get("/post_name", function(req,res){
+    res.render("post", {title:"Generic Post Title", post_content:"post content"});
 });
 
 app.listen(port, () => {
