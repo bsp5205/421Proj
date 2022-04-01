@@ -1,1 +1,65 @@
 <%- include('head.ejs')%>
+<style>
+    .item1 {
+        grid-area: header;
+        height: 200px;
+    }
+    .item2 {
+        grid-area: menu;
+        height: 800px;
+    }
+    .item3 {
+        grid-area: main;
+        height: auto;
+    }
+    .item4 {
+        grid-area: right;
+        height: 400px;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-areas:
+            '. header header header header .'
+            'menu main main main main right'
+            'menu main main main main right';
+        gap: 10px;
+        background-color: white;
+        padding: 10px;
+    }
+
+    .grid-container > div {
+        background-color: rgb(242, 242, 242);
+        text-align: center;
+        font-size: 30px;
+        border-color: black;
+        border-style: solid;
+    }
+    .block {
+        display: block;
+        width: 96%;
+        background-color: darkgrey;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        margin-top: 2%;
+        padding: 100px;
+        margin-right: 2%;
+        margin-left: 2%;
+    }
+    .block:hover {
+        background-color: #ddd;
+        color: black;
+    }
+</style>
+<div class="grid-container">
+    <div class="item1">Trending</div>
+    <div class="item2">Left</div>
+    <div class="item3">
+        <button class="block">Block Button</button>
+        <button class="block">Block Button</button>
+        <button class="block">Block Button</button>
+        <button class="block">Block Button</button>
+    </div>
+    <div class="item4">Right</div>
+</div>
