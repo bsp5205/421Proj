@@ -54,12 +54,16 @@
     .logo{
         margin-left: 30px;
     }
+    .logoButton{
+        background-color: lightgray;
+        border: none;
+    }
     .right{
         padding-right: 30px;
     }
 </style>
 <div class="topnav">
-    <image src="./images/Logo.png" height="100" width="auto" class="logo"></image>
+    <button class="logoButton" onclick="window.location.href = 'http://localhost:3000/'"><image src="./images/Logo.png" height="100" width="auto" class="logo"></image></button>
     <form class="myForum">
         <input class="SearchBarInput" type="search" id="query" name="q" placeholder="Search...">
         <button class="button button2">Search</button>
