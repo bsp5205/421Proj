@@ -47,6 +47,17 @@
         padding: 100px;
         margin: 2%;
     }
+    .blockTrending {
+        display: inline;
+        position: center;
+        width: 100px;
+        height: 100px;
+        background-color: darkgrey;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        padding: 20px;
+    }
     .blockRight {
         display: block;
         width: 96%;
@@ -65,12 +76,20 @@
         background-color: #ddd;
         color: black;
     }
+    .blockTrending:hover{
+        background-color: #ddd;
+        color: black;
+    }
 </style>
 <div class="grid-container">
     <div class="item1">
         <p>Trending:</p>
+        <button class="blockTrending">Block Button</button>
+        <button class="blockTrending">Block Button</button>
+        <button class="blockTrending">Block Button</button>
+        <button class="blockTrending">Block Button</button>
     </div>
-    <div class="item2">
+    <div class="item2" style="margin-left: 20px">
         <p>Ads</p>
     </div>
     <div class="item3">
