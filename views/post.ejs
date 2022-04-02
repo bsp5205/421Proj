@@ -44,6 +44,16 @@
         padding: 100px;
         margin: 2%;
     }
+    .comment {
+        border-color: #000;
+        border-style: solid;
+        margin: 2%;
+    }
+    .post {
+        border-color: #000;
+        border-style: solid;
+        margin: 2%;
+    }
     .blockRight {
         display: block;
         width: 96%;
@@ -62,20 +72,40 @@
         background-color: #ddd;
         color: black;
     }
+    .reply{
+        margin: 2%;
+    }
+    .button3 {
+        background-color: rgb(54, 54, 54);
+        border: none;
+        color: white;
+        padding: 5px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+    }
 </style>
 
 <div class="grid-container">
     <div class="item2">Ads</div>
     <div class="item3">
-        <div>
+        <div class="post">
             <h1><%= title %></h1>
             <p><%= post_content %></p>
+            <a><button class="button button2">Reply</button></a>
         </div>
-        <div>
+        <div class="comment">
             <p>Comment 1</p>
+            <a><button class="button button2">Reply</button></a>
         </div>
-        <div>
+        <div class="comment">
             <p>Comment 2</p>
+            <a><button class="button button2">Reply</button></a>
         </div>
     </div>
     <div class="item4">

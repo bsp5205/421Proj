@@ -20,6 +20,9 @@ app.get("/", function(req,res){
 app.get("/login", (req, res) => {
     res.render("login.ejs", {title: "FUBAR | Login"});
 });
+app.get("/post_name", (req, res) => {
+    res.render("post", {title:"Post Title", post_content:"Post content"});
+});
 
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`)
