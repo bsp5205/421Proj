@@ -14,7 +14,10 @@
     }
     .item4 {
         grid-area: right;
-        height: 450px;
+        height: 580px;
+    }
+    p{
+        padding-left: 2%;
     }
 
     .grid-container {
@@ -72,27 +75,21 @@
         background-color: #ddd;
         color: black;
     }
-    .reply{
-        margin: 2%;
+    .favorites{
+        display: block;
+        margin: auto;
     }
-    .button3 {
-        background-color: rgb(54, 54, 54);
-        border: none;
-        color: white;
-        padding: 5px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        -webkit-transition-duration: 0.4s; /* Safari */
-        transition-duration: 0.4s;
+    .favorites > p{
+        font-size: 20px;
+        margin-bottom: 0;
+        margin-top: 0;
     }
 </style>
 
 <div class="grid-container">
-    <div class="item2">Ads</div>
+    <div class="item2">
+        <p>Ads</p>
+    </div>
     <div class="item3">
         <div class="post">
             <h1><%= title %></h1>
@@ -109,11 +106,22 @@
         </div>
     </div>
     <div class="item4">
-        <p>Favorites:</p>
-        <button class="blockRight">Block Button</button>
-        <button class="blockRight">Block Button</button>
-        <button class="blockRight">Block Button</button>
-        <button class="blockRight">Block Button</button>
+        <div class="favorites">
+            <p>Title 1</p>
+            <button class="blockRight">Block Button</button>
+        </div>
+        <div class="favorites">
+            <p>Title 2</p>
+            <button class="blockRight">Block Button</button>
+        </div>
+        <div class="favorites">
+            <p>Title 3</p>
+            <button class="blockRight">Block Button</button>
+        </div>
+        <div class="favorites">
+            <p>Title 4</p>
+            <button class="blockRight">Block Button</button>
+        </div>
     </div>
 </div>
 

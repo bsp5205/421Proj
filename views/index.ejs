@@ -14,7 +14,7 @@
     }
     .item4 {
         grid-area: right;
-        height: 450px;
+        height: 580px;
     }
     p{
         padding-left: 2%;
@@ -48,15 +48,14 @@
         margin: 2%;
     }
     .blockTrending {
-        display: inline;
-        position: center;
-        width: 100px;
-        height: 100px;
+        display: block;
+        height: 125px;
+        width: 125px;
         background-color: darkgrey;
         font-size: 16px;
         cursor: pointer;
         text-align: center;
-        padding: 20px;
+        margin: auto;
     }
     .blockRight {
         display: block;
@@ -80,30 +79,98 @@
         background-color: #ddd;
         color: black;
     }
+    .centered {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .trending{
+        display: block;
+        margin: auto;
+    }
+    .trending > p{
+        font-size: 20px;
+        margin-bottom: 0;
+    }
+    .favorites{
+        display: block;
+        margin: auto;
+    }
+    .favorites > p{
+        font-size: 20px;
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+    .main{
+        display: block;
+        margin: auto;
+    }
+    .main > p{
+        margin-bottom: -20px;
+    }
 </style>
 <div class="grid-container">
-    <div class="item1">
-        <p>Trending:</p>
-        <button class="blockTrending">Block Button</button>
-        <button class="blockTrending">Block Button</button>
-        <button class="blockTrending">Block Button</button>
-        <button class="blockTrending">Block Button</button>
+    <div class="item1 centered">
+        <div class="trending">
+            <p>Title</p>
+            <button class="blockTrending">Block Button</button>
+        </div>
+        <div class="trending">
+            <p>Title</p>
+            <button class="blockTrending">Block Button</button>
+        </div>
+        <div class="trending">
+            <p>Title</p>
+            <button class="blockTrending">Block Button</button>
+        </div>
+        <div class="trending">
+            <p>Title</p>
+            <button class="blockTrending">Block Button</button>
+        </div>
+        <div class="trending">
+            <p>Title</p>
+            <button class="blockTrending">Block Button</button>
+        </div>
     </div>
     <div class="item2" style="margin-left: 20px">
         <p>Ads</p>
+        <button class="blockRight">Block Button</button>
     </div>
     <div class="item3">
         <p>From forums you watch:</p>
-        <button class="block" onclick="window.location.href = 'http://localhost:3000/post_name'">Block Button</button>
-        <button class="block">Block Button</button>
-        <button class="block">Block Button</button>
-        <button class="block">Block Button</button>
+        <div class="main">
+            <p>Title 1</p>
+            <button class="block" onclick="window.location.href = 'http://localhost:3000/post_name'">Block Button</button>
+        </div>
+        <div class="main">
+            <p>Title 2</p>
+            <button class="block" onclick="window.location.href = 'http://localhost:3000/post_name'">Block Button</button>
+        </div>
+        <div class="main">
+            <p>Title 3</p>
+            <button class="block" onclick="window.location.href = 'http://localhost:3000/post_name'">Block Button</button>
+        </div>
+        <div class="main">
+            <p>Title 4</p>
+            <button class="block" onclick="window.location.href = 'http://localhost:3000/post_name'">Block Button</button>
+        </div>
     </div>
     <div class="item4">
-        <p>Favorites:</p>
-        <button class="blockRight">Block Button</button>
-        <button class="blockRight">Block Button</button>
-        <button class="blockRight">Block Button</button>
-        <button class="blockRight">Block Button</button>
+        <div class="favorites">
+            <p>Title 1</p>
+            <button class="blockRight">Block Button</button>
+        </div>
+        <div class="favorites">
+            <p>Title 2</p>
+            <button class="blockRight">Block Button</button>
+        </div>
+        <div class="favorites">
+            <p>Title 3</p>
+            <button class="blockRight">Block Button</button>
+        </div>
+        <div class="favorites">
+            <p>Title 4</p>
+            <button class="blockRight">Block Button</button>
+        </div>
     </div>
 </div>
