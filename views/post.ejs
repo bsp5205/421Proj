@@ -3,6 +3,8 @@
     .item1 {
         grid-area: header;
         height: 200px;
+        visibility: hidden;
+        margin-top: -200px;
     }
     .item2 {
         grid-area: menu;
@@ -19,6 +21,7 @@
     p{
         padding-left: 2%;
     }
+
     .grid-container {
         display: grid;
         grid-template-areas:
@@ -36,6 +39,17 @@
         font-size: 30px;
         border-color: black;
         border-style: solid;
+    }
+
+    .post {
+        border-color: #000;
+        border-style: solid;
+        margin: 2%;
+    }
+    .comment{
+        border-color: #000;
+        border-style: solid;
+        margin: 2%;
     }
     .block {
         display: block;
@@ -108,7 +122,9 @@
     .main > p{
         margin-bottom: -20px;
     }
+
 </style>
+
 <div class="grid-container">
     <div class="item1 centered">
         <div class="trending">
@@ -137,23 +153,22 @@
         <button class="blockRight">Block Button</button>
     </div>
     <div class="item3">
-        <p>From forums you watch:</p>
         <div class="main">
-            <p>Title 1</p>
-            <button class="block" onclick="window.location.href = 'http://localhost:3000/post_name'">Block Button</button>
+            <div class="post">
+                <h1><%= title %></h1>
+                <p><%= post_content %></p>
+                <a><button class="button button2">Reply</button></a>
+            </div>
+            <div class="comment">
+                <p>Comment 1</p>
+                <a><button class="button button2">Reply</button></a>
+            </div>
+            <div class="comment">
+                <p>Comment 2</p>
+                <a><button class="button button2">Reply</button></a>
+            </div>
         </div>
-        <div class="main">
-            <p>Title 2</p>
-            <button class="block" onclick="window.location.href = 'http://localhost:3000/post_name'">Block Button</button>
-        </div>
-        <div class="main">
-            <p>Title 3</p>
-            <button class="block" onclick="window.location.href = 'http://localhost:3000/post_name'">Block Button</button>
-        </div>
-        <div class="main">
-            <p>Title 4</p>
-            <button class="block" onclick="window.location.href = 'http://localhost:3000/post_name'">Block Button</button>
-        </div>
+
     </div>
     <div class="item4">
         <div class="favorites">
@@ -174,3 +189,6 @@
         </div>
     </div>
 </div>
+
+
+
