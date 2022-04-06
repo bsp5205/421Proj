@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bc16586f-7cdd-4dce-9a9f-182403f2c366" name="Changes" comment="background images" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/views/post.ejs" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/main.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/views/login.ejs" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/views/index.ejs" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/views/head.ejs" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="27CJvvFgbu52VTYxNbMW8Nik6L1" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Research Project" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager" selected="Node.js.main.js">
+    <configuration name="main.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/main.js" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.main.js" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bc16586f-7cdd-4dce-9a9f-182403f2c366" name="Changes" comment="" />
+      <created>1648818369528</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1648818369528</updated>
+      <workItem from="1648818370757" duration="5639000" />
+      <workItem from="1648825604591" duration="7548000" />
+      <workItem from="1648837172046" duration="3783000" />
+      <workItem from="1649073266034" duration="173000" />
+      <workItem from="1649074178893" duration="496000" />
+      <workItem from="1649075984664" duration="24000" />
+      <workItem from="1649076264427" duration="204000" />
+      <workItem from="1649076492584" duration="97000" />
+      <workItem from="1649096728148" duration="3336000" />
+      <workItem from="1649112672533" duration="2067000" />
+      <workItem from="1649269613157" duration="298000" />
+    </task>
+    <task id="LOCAL-00001" summary="NavBar and logo">
+      <created>1648823994087</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1648823994087</updated>
+    </task>
+    <task id="LOCAL-00002" summary="main page layout">
+      <created>1648834657312</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1648834657312</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Updates to buttons and some formatting">
+      <created>1648835150445</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1648835150445</updated>
+    </task>
+    <task id="LOCAL-00004" summary="button action">
+      <created>1648838204710</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1648838204710</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Home button (logo)">
+      <created>1648838563517</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1648838563517</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Home button (logo)">
+      <created>1648839851650</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1648839851650</updated>
+    </task>
+    <task id="LOCAL-00007" summary="lots of stuff">
+      <created>1648840947617</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1648840947617</updated>
+    </task>
+    <task id="LOCAL-00008" summary="lots of stuff">
+      <created>1649096803450</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1649096803450</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Fixed spacing between pages">
+      <created>1649097894024</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1649097894024</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Fixed my stupidity">
+      <created>1649098192641</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1649098192641</updated>
+    </task>
+    <task id="LOCAL-00011" summary="background images">
+      <created>1649269882235</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1649269882235</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="NavBar and logo" />
+    <MESSAGE value="main page layout" />
+    <MESSAGE value="Updates to buttons and some formatting" />
+    <MESSAGE value="button action" />
+    <MESSAGE value="Home button (logo)" />
+    <MESSAGE value="lots of stuff" />
+    <MESSAGE value="Fixed spacing between pages" />
+    <MESSAGE value="Fixed my stupidity" />
+    <MESSAGE value="Fixed my stupidity p2" />
+    <MESSAGE value="background images" />
+    <option name="LAST_COMMIT_MESSAGE" value="background images" />
+  </component>
+</project>
