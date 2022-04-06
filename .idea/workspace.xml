@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="bc16586f-7cdd-4dce-9a9f-182403f2c366" name="Changes" comment="background images" />
+=======
+    <list default="true" id="0376a37b-9ccf-4845-9a0b-4247df089d5a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    </list>
+>>>>>>> 5014689ffc7d3af1c1339cd2c5cd399d7bdf0985
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -9,6 +17,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+<<<<<<< HEAD
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -25,11 +34,17 @@
     <setting file="file://$PROJECT_DIR$/views/login.ejs" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/views/index.ejs" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/views/head.ejs" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+=======
+>>>>>>> 5014689ffc7d3af1c1339cd2c5cd399d7bdf0985
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectId" id="27CJvvFgbu52VTYxNbMW8Nik6L1" />
+=======
+  <component name="ProjectId" id="27Crufg2NNT2QGcAjXu5G4goaIt" />
+>>>>>>> 5014689ffc7d3af1c1339cd2c5cd399d7bdf0985
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -38,8 +53,15 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Research Project" />
     <property name="nodejs_package_manager_path" value="npm" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Program Files/nodejs/node.exe" />
+    <property name="nodejs_interpreter_path" value="$PROJECT_DIR$/../../../../Program Files/nodejs/node" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
+>>>>>>> 5014689ffc7d3af1c1339cd2c5cd399d7bdf0985
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Node.js.main.js">
@@ -55,6 +77,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+<<<<<<< HEAD
       <changelist id="bc16586f-7cdd-4dce-9a9f-182403f2c366" name="Changes" comment="" />
       <created>1648818369528</created>
       <option name="number" value="Default" />
@@ -150,11 +173,23 @@
       <updated>1649269882235</updated>
     </task>
     <option name="localTasksCounter" value="12" />
+=======
+      <changelist id="0376a37b-9ccf-4845-9a0b-4247df089d5a" name="Changes" comment="" />
+      <created>1648835132944</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1648835132944</updated>
+      <workItem from="1648835134036" duration="1897000" />
+      <workItem from="1649194828437" duration="3000" />
+      <workItem from="1649194915315" duration="2607000" />
+    </task>
+>>>>>>> 5014689ffc7d3af1c1339cd2c5cd399d7bdf0985
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+<<<<<<< HEAD
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -178,5 +213,10 @@
     <MESSAGE value="Fixed my stupidity p2" />
     <MESSAGE value="background images" />
     <option name="LAST_COMMIT_MESSAGE" value="background images" />
+=======
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+>>>>>>> 5014689ffc7d3af1c1339cd2c5cd399d7bdf0985
   </component>
 </project>
