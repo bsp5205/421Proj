@@ -20,6 +20,11 @@ app.get("/", function(req,res){
 app.get("/login", (req, res) => {
     res.render("login.ejs", {title: "FUBAR | Login"});
 });
+
+app.get("/signup", (req,res) =>{
+    res.render("signup.ejs", {title: "FUBAR | Sign Up"})
+});
+
 app.get("/post_name", (req, res) => {
     res.render("post", {title:"Post Title", post_content:"Post content"});
 });
