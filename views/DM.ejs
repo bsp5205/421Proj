@@ -1,42 +1,71 @@
 <%- include('head.ejs')%>
 <style>
-    .msg{
 
+    #cont{
+
+    }
+    .msg{
+        background-color: lightgray;
+        margin-left: 1%;
+        margin-top: 1%;
     }
     .centered {
         display: flex;
         justify-content: center;
         align-items: center;
     }
-
     .textBoxSize{
-        width: 80%;
+        width: 90%;
         height: 100px;
     }
-
     .buttonSize{
         height: 100px;
         width: 100px;
     }
+    .content {
+        overflow:auto;
+        height: 80%;
+    }
+    .footer {
+        height: 100px;
+    }
+    .background{
+        background-color: lightgray;
+        height: 80%;
+        width: 90%;
+        margin-left: 5%;
+        margin-top: 2%;
+    }
+    #myForm{
+
+    }
 </style>
 <script>
+
     function postMessage(message){
-        var paragraphs = document.getElementsByClassName("msg")
-        recentPar = paragraphs[paragraphs.length-1]
-        recentPar.innerHTML = message;
+        var tag = document.createElement("p");
+        var text = document.createTextNode(message);
+        tag.append(text);
+        tag.classList.add("msg");
+        var cont = document.getElementById("cont");
+        cont.appendChild(tag);
         event.preventDefault();
         document.getElementById("myForm").reset();
+        tag.scrollIntoView();
+        window.setTimeout( function () { top(); }, 2000 );
     }
+
 </script>
-<div>
 
-    <p class="msg class"></p>
+<div class="background">
+    <div class="msg">
+        <div id="cont" class="content"></div>
+    </div>
 
-    <footer>
+    <footer class="footer">
         <form id="myForm" class="centered">
             <input type="text" id="msg" class="textBoxSize">
             <input type="submit" class="buttonSize" value="Send" onclick="postMessage(document.getElementById('msg').value)">
         </form>
     </footer>
-
 </div>
