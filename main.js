@@ -42,7 +42,7 @@ passport.use('local', new localStrategy(
 ));
 
 app.post('/login', passport.authenticate('local',{
-        successRedirect: "/",
+        successRedirect: "/profile",
         failureRedirect: "/login-failed",
         session:false
     })
@@ -57,6 +57,10 @@ app.get("/", function(req,res){
 
 app.get("/login", (req, res) => {
     res.render("login.ejs", {title: "FUBAR | Login", message:""});
+});
+
+app.get("/profile", (req, res) => {
+    res.render("profile.ejs", {title: "FUBAR | Login", message:""});
 });
 
 app.get("/login-failed", (req, res) => {
