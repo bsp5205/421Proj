@@ -63,6 +63,10 @@ app.get("/profile", (req, res) => {
     res.render("profile.ejs", {title: "FUBAR | Login", message:""});
 });
 
+app.get("/DM", (req, res) => {
+    res.render("DM.ejs", {title: "FUBAR | Login", message:""});
+});
+
 app.get("/login-failed", (req, res) => {
     res.render("login.ejs", {title: "FUBAR | Login", message: "Username or password incorrect. Please try again."});
 });
