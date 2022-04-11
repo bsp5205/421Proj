@@ -1,1 +1,42 @@
 <%- include('head.ejs')%>
+<style>
+    .msg{
+
+    }
+    .centered {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .textBoxSize{
+        width: 80%;
+        height: 100px;
+    }
+
+    .buttonSize{
+        height: 100px;
+        width: 100px;
+    }
+</style>
+<script>
+    function postMessage(message){
+        var paragraphs = document.getElementsByClassName("msg")
+        recentPar = paragraphs[paragraphs.length-1]
+        recentPar.innerHTML = message;
+        event.preventDefault();
+        document.getElementById("myForm").reset();
+    }
+</script>
+<div>
+
+    <p class="msg class"></p>
+
+    <footer>
+        <form id="myForm" class="centered">
+            <input type="text" id="msg" class="textBoxSize">
+            <input type="submit" class="buttonSize" value="Send" onclick="postMessage(document.getElementById('msg').value)">
+        </form>
+    </footer>
+
+</div>
