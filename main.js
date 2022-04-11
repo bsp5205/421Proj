@@ -52,7 +52,7 @@ app.use(express.static(path.join(__dirname,'public')));
 
 
 app.get("/", function(req,res){
-    res.render("index", {title:"FUABAR | Home",message:"This is a message"});
+    res.render("index", {title:"FUBAR | Home",message:"This is a message"});
 });
 
 app.get("/login", (req, res) => {
