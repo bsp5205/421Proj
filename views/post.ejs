@@ -1,8 +1,10 @@
-<%- include('head.ejs')%>
+<%- include('loggedinhead.ejs')%>
 <style>
     .item1 {
         grid-area: header;
         height: 200px;
+        visibility: hidden;
+        margin-top: -200px;
     }
     .item2 {
         grid-area: menu;
@@ -14,12 +16,17 @@
     }
     .item4 {
         grid-area: right;
-        height: 450px;
+        height: 580px;
+    }
+    p{
+        padding-left: 2%;
     }
 
     .grid-container {
+        background-image: url("https://images.hdqwalls.com/wallpapers/vaporwave-zl.jpg") !important;
         display: grid;
         grid-template-areas:
+            '. header header header header .'
             'menu main main main main right'
             'menu main main main main right';
         gap: 10px;
@@ -31,8 +38,19 @@
         background-color: rgb(242, 242, 242);
         text-align: left;
         font-size: 30px;
-        border-color: black;
+        border-color: #FF10F0;
         border-style: solid;
+    }
+
+    .post {
+        border-color: #000;
+        border-style: solid;
+        margin: 2%;
+    }
+    .comment{
+        border-color: #000;
+        border-style: solid;
+        margin: 2%;
     }
     .block {
         display: block;
@@ -43,6 +61,16 @@
         text-align: center;
         padding: 100px;
         margin: 2%;
+    }
+    .blockTrending {
+        display: block;
+        height: 125px;
+        width: 125px;
+        background-color: darkgrey;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        margin: auto;
     }
     .blockRight {
         display: block;
@@ -62,29 +90,106 @@
         background-color: #ddd;
         color: black;
     }
+    .blockTrending:hover{
+        background-color: #ddd;
+        color: black;
+    }
+    .centered {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .trending{
+        display: block;
+        margin: auto;
+    }
+    .trending > p{
+        font-size: 20px;
+        margin-bottom: 0;
+    }
+    .favorites{
+        display: block;
+        margin: auto;
+    }
+    .favorites > p{
+        font-size: 20px;
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+    .main{
+        display: block;
+        margin: auto;
+    }
+    .main > p{
+        margin-bottom: -20px;
+    }
+
 </style>
 
 <div class="grid-container">
-    <div class="item2">Ads</div>
+    <div class="item1 centered">
+        <div class="trending">
+            <p>Title</p>
+            <button class="blockTrending">Block Button</button>
+        </div>
+        <div class="trending">
+            <p>Title</p>
+            <button class="blockTrending">Block Button</button>
+        </div>
+        <div class="trending">
+            <p>Title</p>
+            <button class="blockTrending">Block Button</button>
+        </div>
+        <div class="trending">
+            <p>Title</p>
+            <button class="blockTrending">Block Button</button>
+        </div>
+        <div class="trending">
+            <p>Title</p>
+            <button class="blockTrending">Block Button</button>
+        </div>
+    </div>
+    <div class="item2" style="margin-left: 20px">
+        <p>Ads</p>
+        <button class="blockRight">Block Button</button>
+    </div>
     <div class="item3">
-        <div>
-            <h1><%= title %></h1>
-            <p><%= post_content %></p>
+        <div class="main">
+            <div class="post">
+                <h1><%= title %></h1>
+                <p><%= post_content %></p>
+                <a><button class="button button2">Reply</button></a>
+            </div>
+            <div class="comment">
+                <p>Comment 1</p>
+                <a><button class="button button2">Reply</button></a>
+            </div>
+            <div class="comment">
+                <p>Comment 2</p>
+                <a><button class="button button2">Reply</button></a>
+            </div>
         </div>
-        <div>
-            <p>Comment 1</p>
-        </div>
-        <div>
-            <p>Comment 2</p>
-        </div>
+
     </div>
     <div class="item4">
-        <p>Favorites:</p>
-        <button class="blockRight">Block Button</button>
-        <button class="blockRight">Block Button</button>
-        <button class="blockRight">Block Button</button>
-        <button class="blockRight">Block Button</button>
+        <div class="favorites">
+            <p>Title 1</p>
+            <button class="blockRight">Block Button</button>
+        </div>
+        <div class="favorites">
+            <p>Title 2</p>
+            <button class="blockRight">Block Button</button>
+        </div>
+        <div class="favorites">
+            <p>Title 3</p>
+            <button class="blockRight">Block Button</button>
+        </div>
+        <div class="favorites">
+            <p>Title 4</p>
+            <button class="blockRight">Block Button</button>
+        </div>
     </div>
 </div>
+
 
 
