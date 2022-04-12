@@ -9,10 +9,12 @@ var passport = require('passport');
 var bodyParser = require('body-parser');
 var localStrategy = require('passport-local').Strategy;
 
+let UserName = "";
+
 const app = express();
 const port = 3000;
 
-var UserList = [{username:'admin',password:'admin'}];
+var UserList = [{username:'admin',password:'admin'}, {username:'bpm5520',password:'pass'}, {username:'Shotz',password:'Val'}];
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(passport.initialize());
@@ -26,6 +28,7 @@ passport.use('local', new localStrategy(
         var Check_user = username;
         var Info = UserList.find((element) => {
             if (element.username == Check_user) {
+                UserName = element.username;
                 return element;
             }
         });
@@ -44,10 +47,11 @@ passport.use('local', new localStrategy(
 ));
 
 app.post('/login', passport.authenticate('local',{
-        successRedirect: "/profile",
         failureRedirect: "/login-failed",
-        session:false
-    })
+        session: false}),
+        function(req,res){
+            res.render("profile.ejs", {title: "FUBAR | Testing", username: UserName});
+        }
 );
 
 app.use(express.static(path.join(__dirname,'public')));
@@ -62,7 +66,7 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/profile", (req, res) => {
-    res.render("profile.ejs", {title: "FUBAR | Login", message:""});
+    res.render("profile.ejs", {title: "FUBAR | Login", username:""});
 });
 
 app.get("/DM", (req, res) => {
@@ -83,6 +87,10 @@ app.get("/post_name", (req, res) => {
 
 app.get("/register", (req, res) => {
     res.render("register.ejs", {title: "FUBAR | Register"});
+});
+
+app.get("/subforum", (req, res) => {
+    res.render("subforum.ejs", {title: "FUBAR | Subforum #1"});
 });
 
 app.listen(port, () => {
