@@ -64,7 +64,7 @@
         var div = document.createElement("div");
 
         var img = document.createElement("img");
-        img.setAttribute("src", "./images/Default_pfp.jpg");
+        img.setAttribute("src", "./images/Default.png");
         img.classList.add("image");
         div.appendChild(img);
 
@@ -81,10 +81,13 @@
 
 </script>
 
-<div class="background">
 
+<p><%=username%></p>
+
+<div class="background">
     <div class="msg">
-        <div id="cont" class="content"></div>
+        <div id="cont" class="content">
+        </div>
     </div>
 
     <footer class="footer">

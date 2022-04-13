@@ -9,7 +9,7 @@ var passport = require('passport');
 var bodyParser = require('body-parser');
 var localStrategy = require('passport-local').Strategy;
 
-let UserName = "";
+var UserName = "";
 
 const app = express();
 const port = 3000;
@@ -70,7 +70,7 @@ app.get("/profile", (req, res) => {
 });
 
 app.get("/DM", (req, res) => {
-    res.render("DM.ejs", {title: "FUBAR | Login", message:""});
+    res.render("DM.ejs", {title: "FUBAR | Login", username: UserName});
 });
 
 app.get("/login-failed", (req, res) => {
