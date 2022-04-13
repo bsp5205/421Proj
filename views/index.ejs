@@ -6,7 +6,7 @@
     }
     .item2 {
         grid-area: menu;
-        height: 800px;
+        height: 804px;
     }
     .item3 {
         grid-area: main;
@@ -110,9 +110,30 @@
     .main > p{
         margin-bottom: -20px;
     }
-    .background{
-
+    .btn-size {
+        overflow:hidden;
+        display: block;
     }
+    .adBlock{
+        overflow:hidden;
+        display: block;
+        background-color: darkgrey;
+        cursor: pointer;
+        text-align: center;
+    }
+    button {
+        padding: 0px;
+        border: 0px;
+    }
+    .ads{
+        display: block;
+        margin: auto;
+    }
+    .img-size{
+        margin-right: -98px;
+        margin-bottom: -2px;
+    }
+
 </style>
 <div class="background"></div>
 <div class="grid-container">
@@ -138,9 +159,10 @@
             <button class="blockTrending">Block Button</button>
         </div>
     </div>
-    <div class="item2" style="margin-left: 20px">
-        <p>Ads</p>
-        <button class="blockRight"><img src="./images/Balorant.webp" height="50px" width="auto"></button>
+    <div class="item2">
+        <div class="img-size">
+            <button class="adBlock" onclick="window.location.href = 'https://playvalorant.com/en-us/?gclid=CjwKCAjw6dmSBhBkEiwA_W-EoAgh1lHdzMCyQY7omW-rRzAwNPWDytHjm-OElMhJnrFta_ZJuq1BthoCICwQAvD_BwE&gclsrc=aw.ds'"><img src="./images/test.jpg"></button>
+        </div>
     </div>
     <div class="item3">
         <p>From forums you watch:</p>
