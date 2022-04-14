@@ -1,6 +1,5 @@
 <%- include('head.ejs')%>
 <style>
-
     #cont{
 
     }
@@ -42,37 +41,52 @@
     .image{
         height: 30px;
         width: 30px;
+        padding-right: 5px;
     }
     .msgCont{
         display: flex;
         margin-left: 1%;
         margin-top: 1%;
         margin-right: 1%;
+        margin-bottom: -25px;
     }
     .msgText{
+        display: block;
         padding-left: 5px;
+    }
+    .text{
+        margin-left: 5%;
     }
 </style>
 <script>
-
     function postMessage(message){
-        var tag = document.createElement("p");
-        var text = document.createTextNode(message);
-        tag.append(text);
-        tag.classList.add("msgText");
+        var UN = document.createElement("p");
+        UN.append(test);
+
+        var msg = document.createElement("p");
+        msg.append(message);
+        msg.classList.add("text")
 
         var div = document.createElement("div");
+        var outerDiv = document.createElement("div");
 
-        var img = document.createElement("img");
-        img.setAttribute("src", "./images/Default.png");
-        img.classList.add("image");
-        div.appendChild(img);
+        var pic = document.createElement("img");
+        pic.src = test2;
+        pic.classList.add("image");
+        div.appendChild(pic);
 
-        div.appendChild(tag);
-        div.classList.add("msgCont");
+        div.appendChild(UN);
+
+        div.classList.add("msgCont")
+
+        outerDiv.append(div);
+        outerDiv.append(msg);
+
+        outerDiv.classList.add("msgText");
 
         var cont = document.getElementById("cont");
-        cont.appendChild(div);
+        cont.appendChild(outerDiv);
+
         event.preventDefault();
         document.getElementById("myForm").reset();
         tag.scrollIntoView();
@@ -81,12 +95,10 @@
 
 </script>
 
-
-<p><%=username%></p>
-
 <div class="background">
     <div class="msg">
         <div id="cont" class="content">
+
         </div>
     </div>
 
@@ -94,6 +106,10 @@
         <form id="myForm" class="centered">
             <input type="text" id="msg" class="textBoxSize">
             <input type="submit" class="buttonSize" value="Send" onclick="postMessage(document.getElementById('msg').value)">
+            <script>
+                var test = '<%=username%>';
+                var test2 = '<%=path%>';
+            </script>
         </form>
     </footer>
 </div>

@@ -19,8 +19,9 @@ app.set("views",path.resolve(__dirname,"views"));
 app.set("view engine","ejs");
 
 // Login authentication
+var user;
 app.post('/login', (req, res) => {
-    let user = req.body.username;
+    user = req.body.username;
     let pass = req.body.password;
 
     // Check if entries are valid
@@ -88,8 +89,10 @@ app.get("/profile", (req, res) => {
     res.render("profile.ejs", {title: "FUBAR | Login", username:""});
 });
 
+var myPath;
 app.get("/DM", (req, res) => {
-    res.render("DM.ejs", {title: "FUBAR | Login", username: UserName});
+    myPath = "./images/Default.png";
+    res.render("DM.ejs", {title: "FUBAR | Login", username: user, path: myPath});
 });
 
 app.get("/login-failed", (req, res) => {
