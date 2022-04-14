@@ -6,9 +6,8 @@ const mysql = require('mysql');
 
 var passport = require('passport');
 var bodyParser = require('body-parser');
+const { title } = require('process');
 var localStrategy = require('passport-local').Strategy;
-
-//var UserName = "";
 
 const app = express();
 const port = 3000;
@@ -28,7 +27,6 @@ app.post('/login', (req, res) => {
     if (user && pass) { // Checks if values are not empty
         con.query('SELECT * FROM login WHERE user = ? AND pass = ?', [user, pass], function(error, results, fields) { // Run the query
         if (error) throw error;
-
         // If the login exists
         if (results.length > 0){
             // Log the user in
@@ -37,17 +35,43 @@ app.post('/login', (req, res) => {
         else {
             res.render('login.ejs', {title: 'FUBAR | LOGIN', message: 'USER OR PASSWORD INCORRECT'});
         }
-    res.send();
-    })
-}})
+        res.send();
+        })
+    }
+})
 
 // Handle signup requests
 app.post('/signup', (req, res) => {
+    let email = req.body.email;
     let user = req.body.username;
     let pass = req.body.password;
     let pass2 = req.body.verifypassword;
    
-})
+    // Check if fields are not empty
+    if (email && user && pass && pass2){
+        // Check if passwords are the same
+        if (pass == pass2){
+            // Check if the email or username already exists
+            con.query("SELECT email, user FROM login WHERE email = ? OR user = ?", [email, user], function(error, results){
+                if (error) throw error;
+
+                if (results.length > 0) {
+                    res.render('signup.ejs', {title: 'FUBAR | Signup', message: 'Email or username already exists!'})
+                }
+                else { // Email and username do not exist so we can create their account
+                    // First setup their profile in the database
+                    con.query('INSERT INTO profile (email) VALUES (?)', email)
+
+                    // Now create their login in the database
+                    con.query('INSERT INTO login (email, user, pass) VALUES (?,?,?)', [email, user, pass])
+
+                    res.render('profile.ejs', {title: "FUBAR | ${user}", username: user})
+                }
+            
+                res.send()
+            })
+    }
+}})
 
 app.use(express.static(path.join(__dirname,'public')));
 
@@ -73,7 +97,7 @@ app.get("/login-failed", (req, res) => {
 });
 
 app.get("/signup", (req,res) =>{
-    res.render("signup.ejs", {title: "FUBAR | Sign Up"})
+    res.render("signup.ejs", {title: "FUBAR | Sign Up", message: ''})
 });
 
 app.get("/post_name", (req, res) => {
