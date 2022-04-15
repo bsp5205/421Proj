@@ -224,7 +224,7 @@
                             </div>
                         </div>
                         <hr>
-                        <button onclick="openForm()"><strong>Edit Profile</strong></button>
+                        <button class = "button button2" onclick="openForm()"><strong>Edit Profile</strong></button>
                         <div class="loginPopup">
                             <div class="formPopup" id="popupForm">
                                 <form action="/action_page.php" class="formContainer">
@@ -283,6 +283,8 @@
                                         list = ["Forum1", "Forum4", "Forum4", "Forum4"];
                                         for (const item in list) {
                                             var userButton = document.createElement("button");
+                                            userButton.classList.add("button");
+                                            userButton.classList.add("button2");
                                             var link = "http://localhost:3000/";
                                             userButton.onclick = function getUrl(url) {
                                                 window.open(link, '_blank')
@@ -298,6 +300,8 @@
                                         list = ["User1", "User2", "User3", "User4"];
                                         for (const item in list) {
                                             var userButton = document.createElement("button");
+                                            userButton.classList.add("button");
+                                            userButton.classList.add("button2");
                                             var link = "http://localhost:3000/";
                                             userButton.onclick = function getUrl(url){
                                                 window.open(link,  '_blank')
