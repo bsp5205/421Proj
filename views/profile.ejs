@@ -80,12 +80,61 @@
     #favForums{
 
     }
-    .userButtons{
-        padding-right: 30px;
+
+    .loginPopup {
+        position: relative;
+        text-align: center;
+        width: 100%;
     }
-    .buttonDiv{
-        padding-bottom: 5px;
+    .formPopup {
+        display: none;
+        position: fixed;
+        left: 45%;
+        top: 5%;
+        transform: translate(-50%, 5%);
+        border: 3px solid #999999;
+        z-index: 9;
     }
+    .formContainer {
+        max-width: 500px;
+        padding: 20px;
+        background-color: #ddd;
+        margin-bottom: 0;
+    }
+    .formContainer input[type=text],
+    .formContainer input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 20px 0;
+        border: none;
+        background: #eee;
+    }
+    .formContainer input[type=text]:focus,
+    .formContainer input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+    .formContainer .btn {
+        padding: 12px 20px;
+        border: none;
+        background-color: #8ebf42;
+        color: #fff;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 15px;
+        opacity: 0.8;
+    }
+    .formContainer .cancel {
+        background-color: #cc0000;
+    }
+    .formContainer .btn:hover,
+    .openButton:hover {
+        opacity: 1;
+    }
+    .info{
+
+    }
+</style>
 </style>
 <body onload = fillFavForums() ></body>
 <body onload = ></body>
@@ -134,7 +183,7 @@
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Full Name</h6>
                             </div>
-                            <div class="col-sm-9 text-secondary">
+                            <div class="col-sm-9 text-secondary info">
                                 Name
                             </div>
                         </div>
@@ -143,7 +192,7 @@
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Email</h6>
                             </div>
-                            <div class="col-sm-9 text-secondary">
+                            <div class="col-sm-9 text-secondary info">
                                 Email
                             </div>
                         </div>
@@ -152,7 +201,7 @@
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Phone</h6>
                             </div>
-                            <div class="col-sm-9 text-secondary">
+                            <div class="col-sm-9 text-secondary info">
                                 Number
                             </div>
                         </div>
@@ -161,7 +210,7 @@
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Mobile</h6>
                             </div>
-                            <div class="col-sm-9 text-secondary">
+                            <div class="col-sm-9 text-secondary info">
                                 Number
                             </div>
                         </div>
@@ -170,11 +219,52 @@
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Address</h6>
                             </div>
-                            <div class="col-sm-9 text-secondary">
+                            <div class="col-sm-9 text-secondary info">
                                 Address
                             </div>
                         </div>
                         <hr>
+                        <button onclick="openForm()"><strong>Edit Profile</strong></button>
+                        <div class="loginPopup">
+                            <div class="formPopup" id="popupForm">
+                                <form action="/action_page.php" class="formContainer">
+                                    <h2>Edit Profile</h2>
+                                    <label for="name">
+                                        <strong>Name</strong>
+                                    </label>
+                                    <input type="text" id="name" placeholder="Your Email" name="name" required>
+
+                                    <label for="phone">
+                                        <strong>Phone</strong>
+                                    </label>
+                                    <input type="text" id="phone" placeholder="Your Phone" name="phone" required>
+
+                                    <label for="cell">
+                                        <strong>Cell Phone</strong>
+                                    </label>
+                                    <input type="text" id="cell" placeholder="Your Cell" name="cell" required>
+
+                                    <label for="address">
+                                        <strong>Address</strong>
+                                    </label>
+                                    <input type="text" id="address" placeholder="Your Cell" name="address" required>
+
+                                    <button type="submit" class="btn" onclick="update()">Confirm Changes</button>
+                                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                                </form>
+                            </div>
+                        </div>
+                        <script>
+                            function update(){
+                                //send update to DB here?
+                            }
+                            function openForm() {
+                                document.getElementById("popupForm").style.display = "block";
+                            }
+                            function closeForm() {
+                                document.getElementById("popupForm").style.display = "none";
+                            }
+                        </script>
                     </div>
                 </div>
 
@@ -188,6 +278,7 @@
 
                                 </div>
                                 <script>
+                                    var tempUser;
                                     function fillFavForums(list) {
                                         list = ["Forum1", "Forum4", "Forum4", "Forum4"];
                                         for (const item in list) {
@@ -219,6 +310,8 @@
                                             var outerDiv = document.getElementById("users");
                                             outerDiv.appendChild(div);
                                         }
+                                        tempUser = sessionStorage.getItem('tempUser');
+                                        tempUser = JSON.parse(tempUser);
                                     }
                                 </script>
                             </div>

@@ -20,8 +20,8 @@ app.set("view engine","ejs");
 
 //user class
 class userProfile{
-    constructor(accountName, accountEmail, accountPhone, accountAddress, accountBio, accountGitHub, accountTwitter, accountInsta, accountFB, accountLink, favoriteForums, followedUsers) {
-        this.accountName = accountName;
+    constructor(accountUsername, accountEmail, accountPhone, accountAddress, accountBio, accountGitHub, accountTwitter, accountInsta, accountFB, accountLink, favoriteForums, followedUsers) {
+        this.accountUsername = accountUsername;
         this.accountEmail = accountEmail;
         this.accountPhone = accountPhone;
         this.accountAddress = accountAddress;
@@ -34,11 +34,12 @@ class userProfile{
         this.favoriteForums = favoriteForums;
         this.followedUsers = followedUsers;
     }
+
 }
 
 var test = new userProfile("First Last", "testEmail", "123-456-7890", "test street", "This is a test bio", "test github", "test twitter", "test insta", "test FB", "Test link", "fav forums", "followed users");
-JSON.stringify(test);
-console.log(JSON.stringify(test));
+test = JSON.stringify(test);
+sessionStorage.setItem("tempUser", test);
 
 // Login authentication
 var user;
