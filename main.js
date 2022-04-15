@@ -18,6 +18,28 @@ app.use(passport.initialize());
 app.set("views",path.resolve(__dirname,"views"));
 app.set("view engine","ejs");
 
+//user class
+class userProfile{
+    constructor(accountName, accountEmail, accountPhone, accountAddress, accountBio, accountGitHub, accountTwitter, accountInsta, accountFB, accountLink, favoriteForums, followedUsers) {
+        this.accountName = accountName;
+        this.accountEmail = accountEmail;
+        this.accountPhone = accountPhone;
+        this.accountAddress = accountAddress;
+        this.accountBio = accountBio;
+        this.accountGitHub = accountGitHub;
+        this.accountTwitter = accountTwitter;
+        this.accountInsta = accountInsta;
+        this.accountFB = accountFB;
+        this.accountLink = accountLink;
+        this.favoriteForums = favoriteForums;
+        this.followedUsers = followedUsers;
+    }
+}
+
+var test = new userProfile("First Last", "testEmail", "123-456-7890", "test street", "This is a test bio", "test github", "test twitter", "test insta", "test FB", "Test link", "fav forums", "followed users");
+JSON.stringify(test);
+console.log(JSON.stringify(test));
+
 // Login authentication
 var user;
 app.post('/login', (req, res) => {

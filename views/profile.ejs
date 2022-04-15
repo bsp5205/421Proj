@@ -74,7 +74,21 @@
     .button2:hover {
         box-shadow: 0 12px 16px 0 rgba(0,255,255,0.5),0 17px 50px 0 rgba(0,255,255,0.19);
     }
+    #users{
+
+    }
+    #favForums{
+
+    }
+    .userButtons{
+        padding-right: 30px;
+    }
+    .buttonDiv{
+        padding-bottom: 5px;
+    }
 </style>
+<body onload = fillFavForums() ></body>
+<body onload = ></body>
 <div class="container">
     <div class="main-body">
         <div class="row gutters-sm">
@@ -170,9 +184,43 @@
                             <div class="card-body">
                                 <h6 class="d-flex align-items-center mb-3">Favorite Forums</h6>
                                 <small></small>
-                                <div>
+                                <div id="favForums">
 
                                 </div>
+                                <script>
+                                    function fillFavForums(list) {
+                                        list = ["Forum1", "Forum4", "Forum4", "Forum4"];
+                                        for (const item in list) {
+                                            var userButton = document.createElement("button");
+                                            var link = "http://localhost:3000/";
+                                            userButton.onclick = function getUrl(url) {
+                                                window.open(link, '_blank')
+                                            }
+                                            userButton.classList.add("userButtons");
+                                            userButton.textContent = list[item];
+                                            var div = document.createElement("div");
+                                            div.classList.add("buttonDiv");
+                                            div.appendChild(userButton);
+                                            var outerDiv = document.getElementById("favForums");
+                                            outerDiv.appendChild(div);
+                                        }
+                                        list = ["User1", "User2", "User3", "User4"];
+                                        for (const item in list) {
+                                            var userButton = document.createElement("button");
+                                            var link = "http://localhost:3000/";
+                                            userButton.onclick = function getUrl(url){
+                                                window.open(link,  '_blank')
+                                            }
+                                            userButton.classList.add("userButtons");
+                                            userButton.textContent = list[item];
+                                            var div = document.createElement("div");
+                                            div.classList.add("buttonDiv");
+                                            div.appendChild(userButton);
+                                            var outerDiv = document.getElementById("users");
+                                            outerDiv.appendChild(div);
+                                        }
+                                    }
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -180,7 +228,9 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <h6 class="d-flex align-items-center mb-3">Followed Users</h6>
-                                <small></small>
+                                <div id="users">
+
+                                </div>
                                 <div>
 
                                 </div>
