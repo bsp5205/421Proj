@@ -3,6 +3,8 @@ var path = require('path');
 const response = require("express");
 const createError = require("http-errors");
 const mysql = require('mysql');
+const cookieParser = require("cookie-parser");
+const sessions = require('express-session');
 
 var passport = require('passport');
 var bodyParser = require('body-parser');
@@ -12,8 +14,18 @@ var localStrategy = require('passport-local').Strategy;
 const app = express();
 const port = 3000;
 
+var session;
+
+app.use(sessions({
+    secret: "thisisasecretstring",
+    saveUninitialized: true,
+    cookie: {maxAge : 1000000},
+    resave: false
+}));
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(passport.initialize());
+app.use(cookieParser());
 
 app.set("views",path.resolve(__dirname,"views"));
 app.set("view engine","ejs");
@@ -39,7 +51,7 @@ class userProfile{
 
 var test = new userProfile("First Last", "testEmail", "123-456-7890", "test street", "This is a test bio", "test github", "test twitter", "test insta", "test FB", "Test link", "fav forums", "followed users");
 test = JSON.stringify(test);
-sessionStorage.setItem("tempUser", test);
+//sessionStorage.setItem("tempUser", test);
 
 // Login authentication
 var user;
@@ -54,6 +66,9 @@ app.post('/login', (req, res) => {
         // If the login exists
         if (results.length > 0){
             // Log the user in
+            session = req.session;
+            session.userid = user;
+
             res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user})
         }
         else {
@@ -109,7 +124,12 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/profile", (req, res) => {
-    res.render("profile.ejs", {title: "FUBAR | Login", username:""});
+    session=req.session;
+    if(session.userid){
+        res.render("profile.ejs", {title: "FUBAR | " + user, username: user});
+    }else{
+        res.render("login.ejs", {title: "FUBAR | Login", message:""});
+    }
 });
 
 var myPath;
@@ -136,6 +156,15 @@ app.get("/register", (req, res) => {
 
 app.get("/subforum", (req, res) => {
     res.render("subforum.ejs", {title: "FUBAR | Subforum #1"});
+});
+
+app.get("/logout",(req,res) => {
+    session = req.session;
+    if(session.userid) {
+        req.session.destroy();
+        res.redirect('/');
+    }else{
+    }
 });
 
 app.listen(port, () => {
