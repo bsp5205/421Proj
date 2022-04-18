@@ -1,4 +1,8 @@
-<%- include('loggedinhead.ejs')%>
+<% if (username){%>
+    <%- include('loggedinhead.ejs') %>
+<% } else { %>
+    <%- include('head.ejs') %>
+<% } %>
 <style>
     .item2 {
         grid-area: menu;

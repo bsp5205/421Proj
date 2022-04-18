@@ -1,4 +1,8 @@
-<div class="top"><<%- include('head.ejs')%></div>
+ <% if (username){%>
+        <%- include('loggedinhead.ejs') %>
+    <% } else { %>
+    <%- include('head.ejs') %>
+    <% } %>
 <style>
     .top{
         position: static;

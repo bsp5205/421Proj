@@ -116,7 +116,12 @@ app.use(express.static(path.join(__dirname,'public')));
 
 
 app.get("/", function(req,res){
-    res.render("index", {title:"FUBAR | Home",message:"This is a message"});
+    session=req.session;
+    if(session.userid){
+        res.render("index", {title:"FUBAR | Home", message:"This is a message", username: user});
+    }else{
+        res.render("index", {title:"FUBAR | Home", message:"This is a message", username: user});
+    }
 });
 
 app.get("/login", (req, res) => {
@@ -135,7 +140,12 @@ app.get("/profile", (req, res) => {
 var myPath;
 app.get("/DM", (req, res) => {
     myPath = "./images/Default.png";
-    res.render("DM.ejs", {title: "FUBAR | Login", username: user, path: myPath});
+    session=req.session;
+    if(session.userid){
+        res.render("DM.ejs", {title: "FUBAR | Login", username: user, path: myPath, username: user});
+    }else{
+        res.render("login.ejs", {title: "FUBAR | Login", message:""});
+    }
 });
 
 app.get("/login-failed", (req, res) => {
@@ -147,7 +157,12 @@ app.get("/signup", (req,res) =>{
 });
 
 app.get("/post_name", (req, res) => {
-    res.render("post", {title:"FUBAR | Post Title", post_content:"Post content"});
+    session=req.session;
+    if(session.userid){
+        res.render("post", {title:"FUBAR | Post Title", post_content:"Post content", username: user});
+    }else{
+        res.render("login.ejs", {title: "FUBAR | Login", message:""});
+    }
 });
 
 app.get("/register", (req, res) => {
@@ -155,7 +170,7 @@ app.get("/register", (req, res) => {
 });
 
 app.get("/subforum", (req, res) => {
-    res.render("subforum.ejs", {title: "FUBAR | Subforum #1"});
+    res.render("subforum.ejs", {title: "FUBAR | Subforum #1", post_content:"Subforum #1", username: user});
 });
 
 app.get("/logout",(req,res) => {
@@ -163,6 +178,7 @@ app.get("/logout",(req,res) => {
     if(session.userid) {
         req.session.destroy();
         res.redirect('/');
+        user = "";
     }else{
     }
 });
