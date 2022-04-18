@@ -69,7 +69,7 @@ app.post('/login', (req, res) => {
             session = req.session;
             session.userid = user;
 
-            res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user})
+            res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: results})
         }
         else {
             res.render('login.ejs', {title: 'FUBAR | LOGIN', message: 'USER OR PASSWORD INCORRECT'});

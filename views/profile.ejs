@@ -231,34 +231,48 @@
                         <button class = "button button2" onclick="openForm()"><strong>Edit Profile</strong></button>
                         <div class="loginPopup">
                             <div class="formPopup" id="popupForm">
-                                <form action="/action_page.php" class="formContainer">
+                                <form class="formContainer">
                                     <h2>Edit Profile</h2>
                                     <label for="name">
                                         <strong>Name</strong>
                                     </label>
-                                    <input type="text" id="name" placeholder="Your Email" name="name" required>
+                                    <input type="text" id="name" placeholder="Your name" name="name" required>
 
                                     <label for="phone">
                                         <strong>Phone</strong>
                                     </label>
-                                    <input type="text" id="phone" placeholder="Your Phone" name="phone" required>
+                                    <input type="text" id="phone" placeholder="Your phone" name="phone" required>
 
                                     <label for="cell">
                                         <strong>Cell Phone</strong>
                                     </label>
-                                    <input type="text" id="cell" placeholder="Your Cell" name="cell" required>
+                                    <input type="text" id="cell" placeholder="Your cell" name="cell" required>
 
                                     <label for="address">
                                         <strong>Address</strong>
                                     </label>
-                                    <input type="text" id="address" placeholder="Your Cell" name="address" required>
+                                    <input type="text" id="address" placeholder="Your address" name="address" required>
 
-                                    <button type="submit" class="btn" onclick="update()">Confirm Changes</button>
+                                    <button type="button" class="btn" onclick="update()">Confirm Changes</button>
                                     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
                                 </form>
                             </div>
                         </div>
                         <script>
+                            function update(){
+                                var info = document.getElementsByClassName("info");
+                                var form = document.getElementsByClassName("formPopup");
+                                var newName = document.getElementById("name").value;
+                                info[0].innerHTML = newName;
+                                var newPhone = document.getElementById("phone").value;
+                                info[2].innerHTML = newPhone;
+                                var newCell = document.getElementById("cell").value;
+                                info[3].innerHTML = newCell;
+                                var newAddr = document.getElementById("address").value;
+                                info[4].innerHTML = newAddr;
+                                closeForm();
+                            }
+
                             function openForm() {
                                 document.getElementById("popupForm").style.display = "block";
                             }
@@ -276,7 +290,7 @@
                                 <h6 class="d-flex align-items-center mb-3">Favorite Forums</h6>
                                 <small></small>
                                 <div id="favForums">
-
+                                    <!-- insert buttons using js script -->
                                 </div>
 
                                 <script>
@@ -331,10 +345,7 @@
                             <div class="card-body">
                                 <h6 class="d-flex align-items-center mb-3">Followed Users</h6>
                                 <div id="users">
-
-                                </div>
-                                <div>
-
+                                    <!-- insert buttons using js script -->
                                 </div>
                             </div>
                         </div>
@@ -347,5 +358,11 @@
 </div>
 
 <div id="fuckYou">
-
+    <ul>
+        <% for(var i=0; i<data.length; i++) {%>
+            <li><%= data[i]['id'] %></li>
+            <li><%= data[i]['email'] %></li>
+            <li><%= data[i]['user'] %></li>
+        <% } %>
+    </ul>
 </div>
