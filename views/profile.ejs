@@ -185,10 +185,12 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-3">
-                                <h6 class="mb-0">Full Name</h6>
+                                <h6 class="mb-0">Username</h6>
                             </div>
                             <div class="col-sm-9 text-secondary info">
-                                Name
+                                <% for(var i=0; i<data.length; i++) {%>
+                                    <%= data[i]['user'] %>
+                                <% } %>
                             </div>
                         </div>
                         <hr>
@@ -197,7 +199,9 @@
                                 <h6 class="mb-0">Email</h6>
                             </div>
                             <div class="col-sm-9 text-secondary info">
-                                Email
+                                <% for(var i=0; i<data.length; i++) {%>
+                                    <%= data[i]['email'] %>
+                                <% } %>
                             </div>
                         </div>
                         <hr>
@@ -262,14 +266,26 @@
                             function update(){
                                 var info = document.getElementsByClassName("info");
                                 var form = document.getElementsByClassName("formPopup");
+
                                 var newName = document.getElementById("name").value;
-                                info[0].innerHTML = newName;
+                                if(newName.length > 0){
+                                    info[0].innerHTML = newName;
+                                }
+
                                 var newPhone = document.getElementById("phone").value;
-                                info[2].innerHTML = newPhone;
+                                if(newPhone.length > 0){
+                                    info[2].innerHTML = newPhone;
+                                }
+
                                 var newCell = document.getElementById("cell").value;
-                                info[3].innerHTML = newCell;
+                                if(newCell.length > 0){
+                                    info[3].innerHTML = newCell;
+                                }
+
                                 var newAddr = document.getElementById("address").value;
-                                info[4].innerHTML = newAddr;
+                                if(newAddr.length > 0){
+                                    info[4].innerHTML = newAddr;
+                                }
                                 closeForm();
                             }
 
