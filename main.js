@@ -5,6 +5,7 @@ const createError = require("http-errors");
 const mysql = require('mysql');
 const cookieParser = require("cookie-parser");
 const sessions = require('express-session');
+const bcrypt = require('bcrypt')
 
 var passport = require('passport');
 var bodyParser = require('body-parser');
@@ -61,24 +62,38 @@ app.post('/login', (req, res) => {
 
     // Check if entries are valid
     if (user && pass) { // Checks if values are not empty
-        con.query('SELECT * FROM login WHERE user = ? AND pass = ?', [user, pass], function(error, results, fields) { // Run the query
-            con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, test, fields){
-                if (results.length > 0){
-                    // Log the user in
-                    session = req.session;
-                    session.userid = user;
-                    res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: test});
-                }
-                else {
-                    res.render('login.ejs', {title: 'FUBAR | LOGIN', message: 'USER OR PASSWORD INCORRECT'});
-                }
-                res.send();
-            })
-        // If the login exists
-
+        con.query('SELECT * FROM login WHERE user = ?', [user], function(error, results, fields) {
+            if (error) throw error
+            if (results.length > 0) {
+                // Decrypt the password
+                bcrypt.compare(pass, results[0].pass, function(error, result) {
+                    if (error) throw error
+                    console.log(pass)
+                    console.log(results[0].pass)
+                    console.log(result)
+                    if (result) { // If compare is successful
+                    // con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, test, fields){
+                         if (results.length > 0){
+                             session = req.session;
+                             session.userid = user;
+                             res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: test});
+                         }
+                         else {
+                             res.render('login.ejs', {title: 'FUBAR | LOGIN', message: 'USER OR PASSWORD INCORRECT'});
+                         }
+                        console.log('Login Success')
+                    }
+                    else { // Password invalid
+                        res.render('login.ejs', {title: 'FUBAR | Login', message: 'Incorrect password'})
+                    }
+                })
+            }
+            else { // Username not found
+                res.render('login.ejs', {title: 'FUBAR | Login', message: 'Username does not exist'})
+            }
         })
     }
-})
+}) 
 
 // Handle signup requests
 app.post('/signup', (req, res) => {
@@ -100,12 +115,16 @@ app.post('/signup', (req, res) => {
                 }
                 else { // Email and username do not exist so we can create their account
                     // First setup their profile in the database
-                    con.query('INSERT INTO profile (email) VALUES (?)', email)
 
-                    // Now create their login in the database
-                    con.query('INSERT INTO login (email, user, pass) VALUES (?,?,?)', [email, user, pass])
+                    // Now create their login in the database after we enccrypt their password
+                    bcrypt.hash(pass, 10, function(err, hash) {
+                        if (err) throw err
+                        con.query('INSERT INTO login (email, user, pass) VALUES (?,?,?)', [email, user, hash])
+                        
+                    });
 
-                    res.render('profile.ejs', {title: "FUBAR | ${user}", username: user})
+
+                    //res.render('profile.ejs', {title: "FUBAR | ${user}", username: user})
                 }
             
                 res.send()
