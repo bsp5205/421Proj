@@ -62,19 +62,20 @@ app.post('/login', (req, res) => {
     // Check if entries are valid
     if (user && pass) { // Checks if values are not empty
         con.query('SELECT * FROM login WHERE user = ? AND pass = ?', [user, pass], function(error, results, fields) { // Run the query
-        if (error) throw error;
+            con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, test, fields){
+                if (results.length > 0){
+                    // Log the user in
+                    session = req.session;
+                    session.userid = user;
+                    res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: test});
+                }
+                else {
+                    res.render('login.ejs', {title: 'FUBAR | LOGIN', message: 'USER OR PASSWORD INCORRECT'});
+                }
+                res.send();
+            })
         // If the login exists
-        if (results.length > 0){
-            // Log the user in
-            session = req.session;
-            session.userid = user;
 
-            res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: results})
-        }
-        else {
-            res.render('login.ejs', {title: 'FUBAR | LOGIN', message: 'USER OR PASSWORD INCORRECT'});
-        }
-        res.send();
         })
     }
 })
