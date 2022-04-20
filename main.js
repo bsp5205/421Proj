@@ -50,8 +50,8 @@ class userProfile{
 
 }
 
-var test = new userProfile("First Last", "testEmail", "123-456-7890", "test street", "This is a test bio", "test github", "test twitter", "test insta", "test FB", "Test link", "fav forums", "followed users");
-test = JSON.stringify(test);
+//var test = new userProfile("First Last", "testEmail", "123-456-7890", "test street", "This is a test bio", "test github", "test twitter", "test insta", "test FB", "Test link", "fav forums", "followed users");
+//test = JSON.stringify(test);
 //sessionStorage.setItem("tempUser", test);
 
 // Login authentication
@@ -72,16 +72,20 @@ app.post('/login', (req, res) => {
                     console.log(results[0].pass)
                     console.log(result)
                     if (result) { // If compare is successful
-                    // con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, test, fields){
-                         if (results.length > 0){
-                             session = req.session;
-                             session.userid = user;
-                             res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: test});
-                         }
-                         else {
-                             res.render('login.ejs', {title: 'FUBAR | LOGIN', message: 'USER OR PASSWORD INCORRECT'});
-                         }
-                        console.log('Login Success')
+                        con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, test, fields) {
+                            if (results.length > 0) {
+                                session = req.session;
+                                session.userid = user;
+                                console.log(test)
+                                res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: test});
+                            } else {
+                                res.render('login.ejs', {
+                                    title: 'FUBAR | LOGIN',
+                                    message: 'USER OR PASSWORD INCORRECT'
+                                });
+                            }
+                            console.log('Login Success')
+                        })
                     }
                     else { // Password invalid
                         res.render('login.ejs', {title: 'FUBAR | Login', message: 'Incorrect password'})
@@ -151,7 +155,10 @@ app.get("/login", (req, res) => {
 app.get("/profile", (req, res) => {
     session=req.session;
     if(session.userid){
-        res.render("profile.ejs", {title: "FUBAR | " + user, username: user});
+        con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, test3, fields) {
+            res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: test3});
+            console.log('Login Success')
+        })
     }else{
         res.render("login.ejs", {title: "FUBAR | Login", message:""});
     }
