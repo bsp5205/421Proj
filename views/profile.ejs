@@ -196,7 +196,7 @@
                                 </a></span>
                         </li>
                         <li class="color list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                            <button>Add</button>
+                            <button class="button button2">Add</button>
                         </li>
                     </ul>
                 </div>
@@ -333,7 +333,7 @@
                                 <h6 class="d-flex align-items-center mb-3">Favorite Forums</h6>
                                 <small></small>
                                 <div id="favForums">
-                                    <!-- insert buttons using js script -->
+                                    <!-- inserted buttons using js script -->
                                 </div>
 
                                 <script>
@@ -388,7 +388,7 @@
                             <div class="card-body">
                                 <h6 class="d-flex align-items-center mb-3">Followed Users</h6>
                                 <div id="users">
-                                    <!-- insert buttons using js script -->
+                                    <!-- inserted buttons using js script -->
                                 </div>
                             </div>
                         </div>
@@ -396,22 +396,5 @@
                 </div>
             </div>
         </div>
-
     </div>
-</div>
-
-<div id="fuckYou">
-    <ul>
-        <% for(var i=0; i<data.length; i++) {%>
-            <li><%= data[i]['id'] %></li>
-            <li><%= data[i]['email'] %></li>
-            <li><%= data[i]['user'] %></li>
-            <li><%= data[i]['phone'] %></li>
-            <li><%= data[i]['address'] %></li>
-            <li><%= data[i]['github'] %></li>
-            <li><%= data[i]['twitter'] %></li>
-            <li><%= data[i]['insta'] %></li>
-            <li><%= data[i]['facebook'] %></li>
-        <% } %>
-    </ul>
 </div>
