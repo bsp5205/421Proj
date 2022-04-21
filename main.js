@@ -174,7 +174,6 @@ app.get("/DM", (req, res) => {
         res.render("login.ejs", {title: "FUBAR | Login", message:""});
     }
 });
-
 app.get("/login-failed", (req, res) => {
     res.render("login.ejs", {title: "FUBAR | Login", message: "Username or password incorrect. Please try again."});
 });
