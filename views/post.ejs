@@ -158,7 +158,73 @@
         max-width: 100%;
     }
 
+    .content{
+        overflow:auto;
+        font-size: 16px;
+    }
+    .textBoxSize{
+        width: 95%;
+        font-size: 16px;
+        height: 10%;
+    }
+    .low{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .comment{
+
+    }
+
 </style>
+
+<script>
+    function postMessage(message){
+        var UN = document.createElement("p");
+        UN.append(test,": ");//username in UN
+
+        var msg = document.createElement("p");
+        msg.append("    ",message);//message from box
+        msg.classList.add("text")
+
+        var div = document.createElement("div");
+        var outerDiv = document.createElement("div");
+        var like = document.createElement('BUTTON');
+        var liket = document.createTextNode("like");
+
+
+        like.appendChild(liket);
+
+
+        div.appendChild(UN);
+
+        div.classList.add("msgCont")
+
+        div.style.textDecoration = "underline";
+        msg.style.textIndent = "1%";
+
+        like.className+= "button button2";
+
+
+
+        outerDiv.append(div);
+        outerDiv.append(msg);
+        outerDiv.appendChild(like);
+
+        outerDiv.style.border = "solid black"
+
+        outerDiv.classList.add("msgText");
+
+        var cont = document.getElementById("cont");
+        cont.appendChild(outerDiv);
+
+        event.preventDefault();
+        document.getElementById("myForm").reset();
+        tag.scrollIntoView();
+        window.setTimeout( function () { top(); }, 2000 );
+    }
+
+</script>
 
 <div class="grid-container">
     <div class="item2">
@@ -176,13 +242,19 @@
                 </div>
                 <a><button class="button button2">Reply</button></a>
             </div>
-            <div class="comment">
-                <p>Comment 1</p>
-                <a><button class="button button2">Reply</button></a>
-            </div>
-            <div class="comment">
-                <p>Comment 2</p>
-                <a><button class="button button2">Reply</button></a>
+                <p>Comments</p>
+                <div class="comment">
+
+                <p><div id="cont" class="content">
+                    </div>
+                </p>
+                <form id="myForm" class="centered">
+                    <input type="text" id="msg" class="textBoxSize">
+                    <input type="submit" class="button button2" value="reply" onclick="postMessage(document.getElementById('msg').value)">
+                    <script>
+                        var test = '<%=username%>';
+                    </script>
+                </form>
             </div>
         </div>
 

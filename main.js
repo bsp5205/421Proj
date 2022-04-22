@@ -185,7 +185,7 @@ app.get("/signup", (req,res) =>{
 app.get("/post_name", (req, res) => {
     session=req.session;
     if(session.userid){
-        res.render("post", {title:"FUBAR | Post Title", post_content:"Post content", username: user});
+        res.render("post", {title:"FUBAR | Post Title", post_content:"Post content", username: user, path: myPath});
     }else{
         res.render("login.ejs", {title: "FUBAR | Login", message:""});
     }
