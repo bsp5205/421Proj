@@ -85,7 +85,6 @@
     #favForums{
 
     }
-
     .loginPopup {
         position: relative;
         text-align: center;
@@ -94,7 +93,8 @@
     .formPopup {
         display: none;
         position: fixed;
-        left: 45%;
+
+        left: 50%;
         top: 5%;
         transform: translate(-50%, 5%);
         border: 3px solid #999999;
@@ -122,7 +122,7 @@
     .formContainer .btn {
         padding: 12px 20px;
         border: none;
-        background-color: #8ebf42;
+        background-color: #FF10F0;
         color: #fff;
         cursor: pointer;
         width: 100%;
@@ -130,7 +130,7 @@
         opacity: 0.8;
     }
     .formContainer .cancel {
-        background-color: #cc0000;
+        background-color: #0c6baf;
     }
     .formContainer .btn:hover,
     .openButton:hover {
@@ -174,22 +174,139 @@
 
     }
 </style>
+<style>
+    .editPopup{
+        display: none;
+        position: fixed;
+
+        left: 50%;
+        top: 5%;
+        transform: translate(-50%, 5%);
+        border: 3px solid #999999;
+        z-index: 9;
+    }
+    .editContainer {
+        max-width: 500px;
+        padding: 20px;
+        background-color: #ddd;
+        margin-bottom: 0;
+    }
+    .editContainer input[type=text],
+    .editContainer input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 20px 0;
+        border: none;
+        background: #eee;
+    }
+    .editContainer input[type=text]:focus,
+    .editContainer input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+    .editContainer .btn {
+        padding: 12px 20px;
+        border: none;
+        background-color: #FF10F0;
+        color: #fff;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 15px;
+        opacity: 0.8;
+    }
+    .editContainer .cancel {
+        background-color: #0c6baf;
+    }
+    .editContainer .btn:hover,
+    .openButton:hover {
+        opacity: 1;
+    }
+
 </style>
 <script>
+
     function editButton(buttonID, newText, link, divID){
-        console.log("in function")
-        var changeButton = document.getElementById(buttonID);
-        changeButton.remove();
+        console.log(divID)
+        if(divID === "githubButtonCont"){
+            document.getElementById("popupEditGH").style.display = "block";
+        }else if(divID === "twitterButtonCont"){
+            document.getElementById("popupEditTwitter").style.display = "block";
+        }else if(divID === "instaButtonCont"){
+            document.getElementById("popupEditInsta").style.display = "block";
+        }else if(divID === "FBButtonCont"){
+            document.getElementById("popupEditFB").style.display = "block";
+        }
+    }
 
-        var mySpan = document.createElement("span");
-        mySpan.classList.add("text-secondary");
-        var myA = document.createElement("a");
-        myA.setAttribute("href", link);
-        myA.text = newText
-        mySpan.appendChild(myA);
+    function closeEdit(close) {
+        document.getElementById(close).style.display = "none";
+    }
+    function updateEdit(divID){
+        var newAccount, testP, buttonDiv, text, button, mySpan, myA;
 
-        var newCont = document.getElementById(divID);
-        newCont.appendChild(mySpan);
+        if(divID === "popupEditGH"){
+            buttonDiv = document.getElementById('githubButtonCont');
+            button = document.getElementById('githubButton');
+            newAccount = document.getElementById("GHEdit").value;
+            if(newAccount.length > 0){
+                mySpan = document.createElement("span");
+                myA = document.createElement("a");
+                myA.href = 'https://github.com/';
+                myA.text = '@' + newAccount;
+                console.log(myA);
+                mySpan.appendChild(myA);
+                buttonDiv.appendChild(mySpan);
+                button.remove();
+                closeEdit(divID);
+            }
+        }else if(divID === "popupEditTwitter"){
+            console.log(divID)
+            buttonDiv = document.getElementById('twitterButtonCont');
+            button = document.getElementById('twitterButton');
+            newAccount = document.getElementById("TwitterEdit").value;
+            if(newAccount.length > 0){
+                mySpan = document.createElement("span");
+                myA = document.createElement("a");
+                myA.href = 'https://twitter.com/?lang=en';
+                myA.text = '@' + newAccount;
+                console.log(myA);
+                mySpan.appendChild(myA);
+                buttonDiv.appendChild(mySpan);
+                button.remove();
+                closeEdit(divID);
+            }
+        }else if(divID === "popupEditInsta"){
+            buttonDiv = document.getElementById('instaButtonCont');
+            button = document.getElementById('instaButton');
+            newAccount = document.getElementById("InstaEdit").value;
+            if(newAccount.length > 0){
+                mySpan = document.createElement("span");
+                myA = document.createElement("a");
+                myA.href = 'https://www.instagram.com/';
+                myA.text = '@' + newAccount;
+                console.log(myA);
+                mySpan.appendChild(myA);
+                buttonDiv.appendChild(mySpan);
+                button.remove();
+                closeEdit(divID);
+            }
+        }else if(divID === "popupEditFB"){
+            buttonDiv = document.getElementById('FBButtonCont');
+            button = document.getElementById('FBButton');
+            newAccount = document.getElementById("FBEdit").value;
+            if(newAccount.length > 0){
+                mySpan = document.createElement("span");
+                myA = document.createElement("a");
+                myA.href = 'https://www.facebook.com/';
+                myA.text = '@' + newAccount;
+                console.log(myA);
+                mySpan.appendChild(myA);
+                buttonDiv.appendChild(mySpan);
+                button.remove();
+                closeEdit(divID);
+            }
+        }
+
     }
 </script>
 <body onload = fillFavForums() ></body>
@@ -222,7 +339,7 @@
                                         </a></span>
                             <% }else{%>
                                 <div id="githubButtonCont">
-                                    <button id="twitterButton" class="button button2" onclick="editButton('twitterButton','testText','https://github.com/', 'githubButtonCont')">Link an account</button>
+                                    <button id="githubButton" class="button button2" onclick="editButton('githubButton','testText','https://github.com/', 'githubButtonCont')">Link an account</button>
                                 </div>
                             <%}%>
                         </li>
@@ -261,6 +378,56 @@
                                               <button id="FBButton" class="button button2" onclick="editButton('FBButton','testText','https://www.facebook.com/', 'FBButtonCont')">Link an account</button>
                                           </div>
                                 <%}%>
+                            <div class="loginPopup">
+                                <div class="editPopup" id="popupEditGH">
+                                    <form class="editContainer">
+                                        <h2>Add your GitHub</h2>
+                                        <label for="GHEdit">
+                                            <strong>Edit</strong>
+                                        </label>
+                                        <input type="text" id="GHEdit" placeholder="" name="GHEdit" required>
+
+                                        <button type="button" class="btn" onclick="updateEdit('popupEditGH')">Confirm Changes</button>
+                                        <button type="button" class="btn cancel" onclick="closeEdit('popupEditGH')">Close</button>
+                                    </form>
+                                </div>
+                                <div class="editPopup" id="popupEditTwitter">
+                                    <form class="editContainer">
+                                        <h2>Add your Twitter</h2>
+                                        <label for="TwitterEdit">
+                                            <strong>Edit</strong>
+                                        </label>
+                                        <input type="text" id="TwitterEdit" placeholder="" name="TwitterEdit" required>
+
+                                        <button type="button" class="btn" onclick="updateEdit('popupEditTwitter')">Confirm Changes</button>
+                                        <button type="button" class="btn cancel" onclick="closeEdit('popupEditTwitter')">Close</button>
+                                    </form>
+                                </div>
+                                <div class="editPopup" id="popupEditInsta">
+                                    <form class="editContainer">
+                                        <h2>Add your Instagram</h2>
+                                        <label for="InstaEdit">
+                                            <strong>Edit</strong>
+                                        </label>
+                                        <input type="text" id="InstaEdit" placeholder="" name="InstaEdit" required>
+
+                                        <button type="button" class="btn" onclick="updateEdit('popupEditInsta')">Confirm Changes</button>
+                                        <button type="button" class="btn cancel" onclick="closeEdit('popupEditInsta')">Close</button>
+                                    </form>
+                                </div>
+                                <div class="editPopup" id="popupEditFB">
+                                    <form class="editContainer">
+                                        <h2>Add your Facebook</h2>
+                                        <label for="FBEdit">
+                                            <strong>Edit</strong>
+                                        </label>
+                                        <input type="text" id="FBEdit" placeholder="" name="FBEdit" required>
+
+                                        <button type="button" class="btn" onclick="updateEdit('popupEditFB')">Confirm Changes</button>
+                                        <button type="button" class="btn cancel" onclick="closeEdit('popupEditFB')">Close</button>
+                                    </form>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -274,7 +441,7 @@
                             </div>
                             <div class="col-sm-9 text-secondary info">
                                 <% for(var i=0; i<data.length; i++) {%>
-                                    <li><%= data[i]['user'] %></li>
+                                    <%= data[i]['user'] %>
                                 <% } %>
                             </div>
                         </div>
@@ -285,7 +452,7 @@
                             </div>
                             <div class="col-sm-9 text-secondary info">
                                 <% if (data[0]['email']){%>
-                                    <li><%= data[0]['email'] %></li>
+                                    <%= data[0]['email'] %>
                                 <% } %>
                             </div>
                         </div>
@@ -296,7 +463,7 @@
                             </div>
                             <div class="col-sm-9 text-secondary info">
                                 <% if (data[0]['phone']){%>
-                                    <li><%= data[0]['phone'] %></li>
+                                    <%= data[0]['phone'] %>
                                 <% } %>
                             </div>
                         </div>
@@ -307,7 +474,7 @@
                             </div>
                             <div class="col-sm-9 text-secondary info">
                                 <% if (data[0]['phone']){%>
-                                    <li><%= data[0]['phone'] %></li>
+                                    <%= data[0]['phone'] %>
                                 <% } %>
                             </div>
                         </div>
@@ -318,7 +485,7 @@
                             </div>
                             <div class="col-sm-9 text-secondary info">
                                 <% if (data[0]['address']){%>
-                                    <li><%= data[0]['address'] %></li>
+                                    <%= data[0]['address'] %>
                                 <% } %>
                             </div>
                         </div>
@@ -348,7 +515,7 @@
                                     </label>
                                     <input type="text" id="address" placeholder="Your address" name="address" required>
 
-                                    <button type="button" class="btn" onclick="updateProfile()">Confirm Changes</button>
+                                    <button type="button" class="btn" onclick="update()">Confirm Changes</button>
                                     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
                                 </form>
                             </div>
