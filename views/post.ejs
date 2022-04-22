@@ -179,6 +179,15 @@
 </style>
 
 <script>
+    var num = 0;
+
+    function like(param){
+        console.log(param)
+            var likes = parseInt(document.getElementById(param).innerHTML);
+            likes += 1;
+            document.getElementById(param).innerHTML = likes;
+    }
+
     function postMessage(message){
         var UN = document.createElement("p");
         UN.append(test,": ");//username in UN
@@ -189,11 +198,11 @@
 
         var div = document.createElement("div");
         var outerDiv = document.createElement("div");
-        var like = document.createElement('BUTTON');
+        var likeb = document.createElement('BUTTON');
         var liket = document.createTextNode("like");
 
 
-        like.appendChild(liket);
+        likeb.appendChild(liket);
 
 
         div.appendChild(UN);
@@ -203,13 +212,23 @@
         div.style.textDecoration = "underline";
         msg.style.textIndent = "1%";
 
-        like.className+= "button button2";
+        likeb.className+= "button button2";
 
+        var a1 = document.createElement("a");
+        a1.append("likes: ");
+        var a2 = document.createElement("a");
+        a2.innerHTML = "0";
+        a2.id = num;
+        num += 1;
 
-
+        console.log(a2.id);
         outerDiv.append(div);
         outerDiv.append(msg);
-        outerDiv.appendChild(like);
+        outerDiv.appendChild(likeb);
+        outerDiv.append(a1);
+        outerDiv.append(a2);
+
+        likeb.addEventListener("click", function() { like(a2.id)});
 
         outerDiv.style.border = "solid black"
 
@@ -240,7 +259,10 @@
                 <div class="post-image">
                     <iframe width="900" height="506" src="https://www.youtube.com/embed/NUVboUDvI98" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <a><button class="button button2">Reply</button></a>
+                <a><button type="button" class="button button2" onclick="like('likes')">like</button>
+                    <a style="font-size: 16px"> likes: <a id="likes" style="font-size: 16px">0</a> </a>
+                </a>
+
             </div>
                 <p>Comments</p>
                 <div class="comment">
