@@ -172,32 +172,46 @@
         justify-content: center;
         align-items: center;
     }
+    .comment{
+
+    }
 
 </style>
 
 <script>
     function postMessage(message){
         var UN = document.createElement("p");
-        UN.append(test);
+        UN.append(test,": ");//username in UN
 
         var msg = document.createElement("p");
-        msg.append(message);
+        msg.append("    ",message);//message from box
         msg.classList.add("text")
 
         var div = document.createElement("div");
         var outerDiv = document.createElement("div");
+        var like = document.createElement('BUTTON');
+        var liket = document.createTextNode("like");
 
-        var pic = document.createElement("img");
-        pic.src = test2;
-        pic.classList.add("image");
-        div.appendChild(pic);
+
+        like.appendChild(liket);
+
 
         div.appendChild(UN);
 
         div.classList.add("msgCont")
 
+        div.style.textDecoration = "underline";
+        msg.style.textIndent = "1%";
+
+        like.className+= "button button2";
+
+
+
         outerDiv.append(div);
         outerDiv.append(msg);
+        outerDiv.appendChild(like);
+
+        outerDiv.style.border = "solid black"
 
         outerDiv.classList.add("msgText");
 
@@ -234,12 +248,11 @@
                 <p><div id="cont" class="content">
                     </div>
                 </p>
-                <form id="myForm" class="low">
+                <form id="myForm" class="centered">
                     <input type="text" id="msg" class="textBoxSize">
                     <input type="submit" class="button button2" value="reply" onclick="postMessage(document.getElementById('msg').value)">
                     <script>
                         var test = '<%=username%>';
-                        var test2 = '<%=path%>';
                     </script>
                 </form>
             </div>
