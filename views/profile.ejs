@@ -1,6 +1,8 @@
 <% if (username){%>
     <%- include('loggedinhead.ejs') %>
 <% } %>
+
+<!--General style-->
 <style>
     body{
         margin-top:0px;
@@ -174,6 +176,8 @@
 
     }
 </style>
+
+<!--style for social media popups-->
 <style>
     .editPopup{
         display: none;
@@ -223,8 +227,58 @@
     }
 
 </style>
-<script>
 
+<!--style for changing profile picture-->
+<style>
+    .profile-pic {
+        color: transparent;
+        transition: all .3s ease;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .profile-pic > input{
+        display: none;
+    }
+    .-label{
+        cursor: pointer;
+        height: 150px;
+        width: 150px;
+    }
+    .profile-pic > img {
+        position: absolute;
+        object-fit: cover;
+        width: 140px;
+        height: 140px;
+        box-shadow: 0 0 10px 0 rgba(255,255,255,.35);
+        border-radius: 100px;
+        z-index: 0;
+    }
+    .-label:hover{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background-color: rgba(0,0,0,.8);
+        z-index: 10000;
+        color: white;
+        transition: background-color .2s ease-in-out;
+        border-radius: 100px;
+        margin-bottom: 0;
+    }
+    span {
+        display: inline-flex;
+    }
+
+</style>
+
+
+<script>
+    var loadFile = function (event) {
+        var image = document.getElementById("output");
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
     function editButton(buttonID, newText, link, divID){
         console.log(divID)
         if(divID === "githubButtonCont"){
@@ -309,8 +363,17 @@
 
     }
 </script>
+
+<!--Script for uploading profile picture-->
+<script>
+    var loadFile = function (event) {
+        var image = document.getElementById("output");
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
 <body onload = fillFavForums() ></body>
 <body onload = ></body>
+
 <div class="container">
     <div class="main-body">
         <div class="row gutters-sm">
@@ -318,7 +381,16 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <button class="profButton"><img src="./images/Default.png" class="rounded-circle profImage" width="150"></button>
+                            <div class="profile-pic">
+                                <label class="-label" for="file">
+                                    <span>Change Image</span>
+                                </label>
+                                <input id="file" type="file" onchange="loadFile(event)"/>
+                                <img src="./images/Default.png" class="rounded-circle profImage" id="output" width="100">
+                            </div>
+                            <!--
+                            <button class="profButton"><img src="./images/Default.png" class="rounded-circle profImage" width="150" id="output"></button>
+                            -->
 
                             <div class="mt-3">
                                 <h4 id="UN"><%= username %></h4>
