@@ -227,3 +227,20 @@ con.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
 });
+
+app.post('/update', (req, res) =>{
+    console.log("Updating DB");
+    let newName = req.body.nameUpdate;
+    let newPhone = req.body.phoneUpdate;
+    let newCountry = req.body.countryUpdate;
+
+    con.query( "UPDATE Profile_Info SET name = ?, phone = ?, country = ? WHERE user = ?",[newName, newPhone, newCountry, user], function (err, result) {
+        if (err) throw err;
+        console.log(result.affectedRows + " record(s) updated");
+    });
+    con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, test3, fields) {
+        res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: test3});
+        console.log('Login Success')
+    })
+
+});

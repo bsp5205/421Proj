@@ -507,11 +507,11 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-3">
-                                <h6 class="mb-0">Username</h6>
+                                <h6 class="mb-0">Name</h6>
                             </div>
                             <div class="col-sm-9 text-secondary info">
                                 <% for(var i=0; i<data.length; i++) {%>
-                                    <%= data[i]['user'] %>
+                                    <%= data[i]['name'] %>
                                 <% } %>
                             </div>
                         </div>
@@ -540,22 +540,11 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-3">
-                                <h6 class="mb-0">Mobile</h6>
+                                <h6 class="mb-0">Country</h6>
                             </div>
                             <div class="col-sm-9 text-secondary info">
-                                <% if (data[0]['phone']){%>
-                                    <%= data[0]['phone'] %>
-                                <% } %>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Address</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary info">
-                                <% if (data[0]['address']){%>
-                                    <%= data[0]['address'] %>
+                                <% if (data[0]['country']){%>
+                                    <%= data[0]['country'] %>
                                 <% } %>
                             </div>
                         </div>
@@ -565,27 +554,22 @@
                             <div class="formPopup" id="popupForm">
                                 <form class="formContainer" method="post" action="http://localhost:3000/update">
                                     <h2>Edit Profile</h2>
-                                    <label for="name">
+                                    <label for="nameUpdate">
                                         <strong>Name</strong>
                                     </label>
-                                    <input type="text" id="name" placeholder="Your name" name="name" required>
+                                    <input type="text" id="nameUpdate" placeholder="Your name" name="nameUpdate" required>
 
-                                    <label for="phone">
+                                    <label for="phoneUpdate">
                                         <strong>Phone</strong>
                                     </label>
-                                    <input type="text" id="phone" placeholder="Your phone" name="phone" required>
+                                    <input type="text" id="phoneUpdate" placeholder="Your phone" name="phoneUpdate" required>
 
-                                    <label for="cell">
-                                        <strong>Cell Phone</strong>
+                                    <label for="countryUpdate">
+                                        <strong>Country</strong>
                                     </label>
-                                    <input type="text" id="cell" placeholder="Your cell" name="cell" required>
+                                    <input type="text" id="countryUpdate" placeholder="Your country" name="countryUpdate" required>
 
-                                    <label for="address">
-                                        <strong>Address</strong>
-                                    </label>
-                                    <input type="text" id="address" placeholder="Your address" name="address" required>
-
-                                    <button type="submit" class="btn" onclick="update()">Confirm Changes</button>
+                                    <button type="submit" class="btn">Confirm Changes</button>
                                     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
                                 </form>
                             </div>
@@ -610,9 +594,9 @@
                                     info[3].innerHTML = newCell;
                                 }
 
-                                var newAddr = document.getElementById("address").value;
-                                if(newAddr.length > 0){
-                                    info[4].innerHTML = newAddr;
+                                var newCountry = document.getElementById("country").value;
+                                if(newCountry.length > 0){
+                                    info[4].innerHTML = newCountry;
                                 }
 
                                 closeForm();
