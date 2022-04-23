@@ -176,7 +176,6 @@
 
     }
 </style>
-
 <!--style for social media popups-->
 <style>
     .editPopup{
@@ -272,8 +271,7 @@
     }
 
 </style>
-
-
+<!--Script for uploading social media-->
 <script>
     var loadFile = function (event) {
         var image = document.getElementById("output");
@@ -363,7 +361,6 @@
 
     }
 </script>
-
 <!--Script for uploading profile picture-->
 <script>
     var loadFile = function (event) {
@@ -371,6 +368,7 @@
         image.src = URL.createObjectURL(event.target.files[0]);
     };
 </script>
+
 <body onload = fillFavForums() ></body>
 <body onload = ></body>
 
@@ -565,7 +563,7 @@
                         <button class = "button button2" onclick="openForm()"><strong>Edit Profile</strong></button>
                         <div class="loginPopup">
                             <div class="formPopup" id="popupForm">
-                                <form class="formContainer">
+                                <form class="formContainer" method="post" action="http://localhost:3000/update">
                                     <h2>Edit Profile</h2>
                                     <label for="name">
                                         <strong>Name</strong>
@@ -587,7 +585,7 @@
                                     </label>
                                     <input type="text" id="address" placeholder="Your address" name="address" required>
 
-                                    <button type="button" class="btn" onclick="update()">Confirm Changes</button>
+                                    <button type="submit" class="btn" onclick="update()">Confirm Changes</button>
                                     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
                                 </form>
                             </div>
@@ -616,6 +614,7 @@
                                 if(newAddr.length > 0){
                                     info[4].innerHTML = newAddr;
                                 }
+
                                 closeForm();
                             }
 
