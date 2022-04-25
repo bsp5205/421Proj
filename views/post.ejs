@@ -175,6 +175,14 @@
     .comment{
 
     }
+    .content{
+        padding:1%;
+        padding-top: 1%;
+    }
+    .postcontent{
+        padding: 1%;
+        font-size: 16px;
+    }
 
 </style>
 
@@ -188,7 +196,7 @@
             document.getElementById(param).innerHTML = likes;
     }
 
-    function postMessage(message){
+    function postMessage(message , param){
         var UN = document.createElement("p");
         UN.append(test,": ");//username in UN
 
@@ -218,8 +226,12 @@
         a1.append("likes: ");
         var a2 = document.createElement("a");
         a2.innerHTML = "0";
-        a2.id = num;
-        num += 1;
+        if(param == "cont") {
+            a2.id = num;
+            num += 1;
+        }else{
+            a2.id = "postid";
+        }
 
         console.log(a2.id);
         outerDiv.append(div);
@@ -232,9 +244,20 @@
 
         outerDiv.style.border = "solid black"
 
+        if(a2.id != 0){
+            outerDiv.style.borderTopStyle = "none";
+        }
+
         outerDiv.classList.add("msgText");
 
-        var cont = document.getElementById("cont");
+        var cont = document.getElementById(param);
+
+        if(param == "postCont"){
+            document.getElementById('postmsg').remove();
+            document.getElementById('postbutton').remove();
+            outerDiv.style.border = "none";
+        }
+
         cont.appendChild(outerDiv);
 
         event.preventDefault();
@@ -255,13 +278,16 @@
         <div class="main">
             <div class="post">
                 <h1><%= title %></h1>
-                <p><%= post_content %></p>
-                <div class="post-image">
-                    <iframe width="900" height="506" src="https://www.youtube.com/embed/NUVboUDvI98" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="postcontent" id="postCont">
+
                 </div>
-                <a><button type="button" class="button button2" onclick="like('likes')">like</button>
-                    <a style="font-size: 16px"> likes: <a id="likes" style="font-size: 16px">0</a> </a>
-                </a>
+                <form id="myForm" class="centered">
+                    <input type="text" id="postmsg" class="textBoxSize">
+                    <input id="postbutton" type="submit" class="button button2" value="reply" onclick="postMessage(document.getElementById('postmsg').value, 'postCont')">
+                    <script>
+                        var test = '<%=username%>';
+                    </script>
+                </form>
 
             </div>
                 <p>Comments</p>
@@ -272,7 +298,7 @@
                 </p>
                 <form id="myForm" class="centered">
                     <input type="text" id="msg" class="textBoxSize">
-                    <input type="submit" class="button button2" value="reply" onclick="postMessage(document.getElementById('msg').value)">
+                    <input type="submit" class="button button2" value="reply" onclick="postMessage(document.getElementById('msg').value, 'cont')">
                     <script>
                         var test = '<%=username%>';
                     </script>
