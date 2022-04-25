@@ -450,50 +450,50 @@
                                 <%}%>
                             <div class="loginPopup">
                                 <div class="editPopup" id="popupEditGH">
-                                    <form class="editContainer">
+                                    <form class="editContainer" method="post" action="http://localhost:3000/updateGitHub">
                                         <h2>Add your GitHub</h2>
                                         <label for="GHEdit">
                                             <strong>Edit</strong>
                                         </label>
                                         <input type="text" id="GHEdit" placeholder="" name="GHEdit" required>
 
-                                        <button type="button" class="btn" onclick="updateEdit('popupEditGH')">Confirm Changes</button>
+                                        <button type="submit" class="btn" onclick="updateEdit('popupEditGH')">Confirm Changes</button>
                                         <button type="button" class="btn cancel" onclick="closeEdit('popupEditGH')">Close</button>
                                     </form>
                                 </div>
                                 <div class="editPopup" id="popupEditTwitter">
-                                    <form class="editContainer">
+                                    <form class="editContainer" method="post" action="http://localhost:3000/updateTwitter">
                                         <h2>Add your Twitter</h2>
                                         <label for="TwitterEdit">
                                             <strong>Edit</strong>
                                         </label>
                                         <input type="text" id="TwitterEdit" placeholder="" name="TwitterEdit" required>
 
-                                        <button type="button" class="btn" onclick="updateEdit('popupEditTwitter')">Confirm Changes</button>
+                                        <button type="submit" class="btn" onclick="updateEdit('popupEditTwitter')">Confirm Changes</button>
                                         <button type="button" class="btn cancel" onclick="closeEdit('popupEditTwitter')">Close</button>
                                     </form>
                                 </div>
                                 <div class="editPopup" id="popupEditInsta">
-                                    <form class="editContainer">
+                                    <form class="editContainer" method="post" action="http://localhost:3000/updateInsta">
                                         <h2>Add your Instagram</h2>
                                         <label for="InstaEdit">
                                             <strong>Edit</strong>
                                         </label>
                                         <input type="text" id="InstaEdit" placeholder="" name="InstaEdit" required>
 
-                                        <button type="button" class="btn" onclick="updateEdit('popupEditInsta')">Confirm Changes</button>
+                                        <button type="submit" class="btn" onclick="updateEdit('popupEditInsta')">Confirm Changes</button>
                                         <button type="button" class="btn cancel" onclick="closeEdit('popupEditInsta')">Close</button>
                                     </form>
                                 </div>
                                 <div class="editPopup" id="popupEditFB">
-                                    <form class="editContainer">
+                                    <form class="editContainer"  method="post" action="http://localhost:3000/updateFacebook">
                                         <h2>Add your Facebook</h2>
                                         <label for="FBEdit">
                                             <strong>Edit</strong>
                                         </label>
                                         <input type="text" id="FBEdit" placeholder="" name="FBEdit" required>
 
-                                        <button type="button" class="btn" onclick="updateEdit('popupEditFB')">Confirm Changes</button>
+                                        <button type="submit" class="btn" onclick="updateEdit('popupEditFB')">Confirm Changes</button>
                                         <button type="button" class="btn cancel" onclick="closeEdit('popupEditFB')">Close</button>
                                     </form>
                                 </div>

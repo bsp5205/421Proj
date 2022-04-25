@@ -233,14 +233,52 @@ app.post('/update', (req, res) =>{
     let newName = req.body.nameUpdate;
     let newPhone = req.body.phoneUpdate;
     let newCountry = req.body.countryUpdate;
-
+    //update DB
     con.query( "UPDATE Profile_Info SET name = ?, phone = ?, country = ? WHERE user = ?",[newName, newPhone, newCountry, user], function (err, result) {
         if (err) throw err;
         console.log(result.affectedRows + " record(s) updated");
     });
+    //refresh profile page to show updated info
     con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, test3, fields) {
         res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: test3});
         console.log('Login Success')
     })
 
+});
+
+app.post('/updateGitHub', (req, res) =>{
+    console.log("Updating DB Socials");
+    let newGitHub = req.body.GHEdit;
+    con.query( "UPDATE Profile_Info SET github = ? WHERE user = ?",[newGitHub, user], function (err, result) {
+        if (err) throw err;
+        console.log(result.affectedRows + " record(s) updated");
+    });
+});
+
+app.post('/updateTwitter', (req, res) =>{
+    console.log("Updating DB Socials");
+    let newTwitter = req.body.TwitterEdit;
+    con.query( "UPDATE Profile_Info SET twitter = ? WHERE user = ?",[newTwitter, user], function (err, result) {
+        if (err) throw err;
+        console.log(result.affectedRows + " record(s) updated");
+    });
+});
+
+app.post('/updateInsta', (req, res) =>{
+    console.log("Updating DB Socials");
+    let newGitHub = req.body.InstaEdit;
+    con.query( "UPDATE Profile_Info SET insta = ? WHERE user = ?",[newGitHub, user], function (err, result) {
+        if (err) throw err;
+        console.log(result.affectedRows + " record(s) updated");
+    });
+});
+
+app.post('/updateFacebook', (req, res) =>{
+    console.log("Updating DB Socials");
+    let newFacebook = req.body.FBEdit;
+    console.log(newFacebook);
+    con.query( "UPDATE Profile_Info SET facebook = ? WHERE user = ?",[newFacebook, user], function (err, result) {
+        if (err) throw err;
+        console.log(result.affectedRows + " record(s) updated");
+    });
 });
