@@ -12,6 +12,8 @@ var bodyParser = require('body-parser');
 const { title } = require('process');
 var localStrategy = require('passport-local').Strategy;
 
+var multer  = require('multer');
+
 const app = express();
 const port = 3000;
 
@@ -28,31 +30,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(passport.initialize());
 app.use(cookieParser());
 
+//set default dir
 app.set("views",path.resolve(__dirname,"views"));
 app.set("view engine","ejs");
-
-//user class
-class userProfile{
-    constructor(accountUsername, accountEmail, accountPhone, accountAddress, accountBio, accountGitHub, accountTwitter, accountInsta, accountFB, accountLink, favoriteForums, followedUsers) {
-        this.accountUsername = accountUsername;
-        this.accountEmail = accountEmail;
-        this.accountPhone = accountPhone;
-        this.accountAddress = accountAddress;
-        this.accountBio = accountBio;
-        this.accountGitHub = accountGitHub;
-        this.accountTwitter = accountTwitter;
-        this.accountInsta = accountInsta;
-        this.accountFB = accountFB;
-        this.accountLink = accountLink;
-        this.favoriteForums = favoriteForums;
-        this.followedUsers = followedUsers;
-    }
-
-}
-
-//var test = new userProfile("First Last", "testEmail", "123-456-7890", "test street", "This is a test bio", "test github", "test twitter", "test insta", "test FB", "Test link", "fav forums", "followed users");
-//test = JSON.stringify(test);
-//sessionStorage.setItem("tempUser", test);
 
 // Login authentication
 var user;
@@ -138,7 +118,6 @@ app.post('/signup', (req, res) => {
 
 app.use(express.static(path.join(__dirname,'public')));
 
-
 app.get("/", function(req,res){
     session=req.session;
     if(session.userid){
@@ -174,6 +153,7 @@ app.get("/DM", (req, res) => {
         res.render("login.ejs", {title: "FUBAR | Login", message:""});
     }
 });
+
 app.get("/login-failed", (req, res) => {
     res.render("login.ejs", {title: "FUBAR | Login", message: "Username or password incorrect. Please try again."});
 });
@@ -212,7 +192,6 @@ app.get("/logout",(req,res) => {
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`)
 });
-
 
 // Connect to the database
 var con = mysql.createConnection({
@@ -282,3 +261,30 @@ app.post('/updateFacebook', (req, res) =>{
         console.log(result.affectedRows + " record(s) updated");
     });
 });
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+})
+
+app.use('/uploads', express.static('uploads'));
+
+var upload = multer({ storage: storage })
+app.get("/", (req, res) => {
+    res.render("index.ejs", {title: "FUBAR | Login"});
+});
+
+app.post('/profile-upload-single', upload.single('profile-file'), function (req, res, next) {
+    // req.file is the `profile-file` file
+    // req.body will hold the text fields, if there were any
+    console.log(JSON.stringify(req.file))
+    var response = '<a href="/">Home</a><br>'
+    response += "Files uploaded successfully.<br>"
+    response += `<img src="${req.file.path}" /><br>`
+    return res.send(response)
+})
+

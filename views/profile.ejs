@@ -362,13 +362,7 @@
     }
 </script>
 <!--Script for uploading profile picture-->
-<script>
-    var loadFile = function (event) {
-        var image = document.getElementById("output");
-        image.src = URL.createObjectURL(event.target.files[0]);
-    };
 </script>
-
 <body onload = fillFavForums() ></body>
 <body onload = ></body>
 
@@ -379,13 +373,17 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <div class="profile-pic">
-                                <label class="-label" for="file">
-                                    <span>Change Image</span>
-                                </label>
-                                <input id="file" type="file" onchange="loadFile(event)"/>
-                                <img src="./images/Default.png" class="rounded-circle profImage" id="output" width="100">
-                            </div>
+                            <form method="POST" action="/profile-upload-single" enctype="multipart/form-data">
+                                <div class="profile-pic">
+                                    <label class="-label" for="file">
+                                        <span>Change Image</span>
+                                    </label>
+                                    <input id='file' type="file" name="profile-file" required onchange="loadFile(event)"/>
+                                    <img src="./images/Default.png" class="rounded-circle profImage" id="output" width="100">
+                                </div>
+                                <input type="submit" value="Upload" />
+                            </form>
+
                             <!--
                             <button class="profButton"><img src="./images/Default.png" class="rounded-circle profImage" width="150" id="output"></button>
                             -->
