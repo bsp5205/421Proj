@@ -56,7 +56,6 @@ app.post('/login', (req, res) => {
                             if (results.length > 0) {
                                 session = req.session;
                                 session.userid = user;
-                                console.log(test)
                                 res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: test});
                             } else {
                                 res.render('login.ejs', {
@@ -135,6 +134,7 @@ app.get("/profile", (req, res) => {
     session=req.session;
     if(session.userid){
         con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, test3, fields) {
+            console.log(test3[0])
             res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: test3});
             console.log('Login Success')
         })
@@ -226,7 +226,7 @@ app.post('/update', (req, res) =>{
 });
 
 app.post('/updateGitHub', (req, res) =>{
-    console.log("Updating DB Socials");
+    console.log("Updating GitHub");
     let newGitHub = req.body.GHEdit;
     con.query( "UPDATE Profile_Info SET github = ? WHERE user = ?",[newGitHub, user], function (err, result) {
         if (err) throw err;
@@ -235,7 +235,7 @@ app.post('/updateGitHub', (req, res) =>{
 });
 
 app.post('/updateTwitter', (req, res) =>{
-    console.log("Updating DB Socials");
+    console.log("Updating Twitter");
     let newTwitter = req.body.TwitterEdit;
     con.query( "UPDATE Profile_Info SET twitter = ? WHERE user = ?",[newTwitter, user], function (err, result) {
         if (err) throw err;
@@ -244,7 +244,7 @@ app.post('/updateTwitter', (req, res) =>{
 });
 
 app.post('/updateInsta', (req, res) =>{
-    console.log("Updating DB Socials");
+    console.log("Updating Instagram");
     let newGitHub = req.body.InstaEdit;
     con.query( "UPDATE Profile_Info SET insta = ? WHERE user = ?",[newGitHub, user], function (err, result) {
         if (err) throw err;
@@ -253,7 +253,7 @@ app.post('/updateInsta', (req, res) =>{
 });
 
 app.post('/updateFacebook', (req, res) =>{
-    console.log("Updating DB Socials");
+    console.log("Updating Facebook");
     let newFacebook = req.body.FBEdit;
     console.log(newFacebook);
     con.query( "UPDATE Profile_Info SET facebook = ? WHERE user = ?",[newFacebook, user], function (err, result) {
@@ -264,20 +264,21 @@ app.post('/updateFacebook', (req, res) =>{
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './uploads')
+        cb(null, './public/images')
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname)
     }
 })
 
-app.use('/uploads', express.static('uploads'));
+app.use('/public/images', express.static('public/images'));
 
 var upload = multer({ storage: storage })
 app.get("/", (req, res) => {
     res.render("index.ejs", {title: "FUBAR | Login"});
 });
 
+var profPicPath;
 app.post('/profile-upload-single', upload.single('profile-file'), function (req, res, next) {
     // req.file is the `profile-file` file
     // req.body will hold the text fields, if there were any
@@ -285,6 +286,17 @@ app.post('/profile-upload-single', upload.single('profile-file'), function (req,
     var response = '<a href="/">Home</a><br>'
     response += "Files uploaded successfully.<br>"
     response += `<img src="${req.file.path}" /><br>`
-    return res.send(response)
+    profPicPath = req.file.path;
+    profPicPath = profPicPath.replace('public\\','');
+    profPicPath = profPicPath.replace('\\','/');
+    profPicPath = './' + profPicPath
+    console.log(profPicPath)
+    console.log("Updating DB profile picture");
+    con.query( "UPDATE Profile_Info SET profilePicLink = ? WHERE user = ?",[profPicPath, user], function (err, result) {
+        if (err) throw err;
+        console.log(result.affectedRows + " record(s) updated");
+    });
+
+    //return res.send(response)
 })
 

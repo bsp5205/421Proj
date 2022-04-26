@@ -289,7 +289,6 @@
             document.getElementById("popupEditFB").style.display = "block";
         }
     }
-
     function closeEdit(close) {
         document.getElementById(close).style.display = "none";
     }
@@ -363,6 +362,7 @@
 </script>
 <!--Script for uploading profile picture-->
 </script>
+
 <body onload = fillFavForums() ></body>
 <body onload = ></body>
 
@@ -379,7 +379,11 @@
                                         <span>Change Image</span>
                                     </label>
                                     <input id='file' type="file" name="profile-file" required onchange="loadFile(event)"/>
-                                    <img src="./images/Default.png" class="rounded-circle profImage" id="output" width="100">
+                                    <% if (data[0]['profilePicLink']){%>
+                                        <img src=<%= data[0]['profilePicLink']%> class="rounded-circle profImage" id="output" width="100">
+                                    <% }else{%>
+                                        <img src="./images/Default.png" class="rounded-circle profImage" id="output" width="100">
+                                    <%}%>
                                 </div>
                                 <input type="submit" value="Upload" />
                             </form>
