@@ -184,7 +184,17 @@ app.get("/register", (req, res) => {
 });
 
 app.get("/subforum", (req, res) => {
-    res.render("subforum.ejs", {title: "FUBAR | Subforum #1", post_content:"Subforum #1", username: user});
+    con.query('SELECT * FROM subforums WHERE title = ?', ['FUBAR'], function(error, subforum, fields) {
+        con.query('SELECT * FROM posts WHERE subforumID = ?', [subforum[0]['id']], function(error, posts, fields) {
+            res.render("subforum.ejs", {title: "FUBAR | " + subforum[0]['title'], username: user, data: subforum, post: posts});
+        })
+    })
+});
+
+app.get("/createPost", (req, res)=>{
+    con.query('SELECT * FROM subforums WHERE title = ?', ['FUBAR'], function(error, subforum, fields) {
+        res.render("createpost.ejs", {title: "FUBAR | " + subforum[0]['title'], username: user, data: subforum});
+    })
 });
 
 app.get("/logout",(req,res) => {
