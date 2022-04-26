@@ -56,7 +56,12 @@ app.post('/login', (req, res) => {
                             if (results.length > 0) {
                                 session = req.session;
                                 session.userid = user;
-                                res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: test});
+                                con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, getForums, fields) {
+                                    con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, getFollowed, fields) {
+                                        res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: test, forums: getForums, followed: getFollowed});
+                                        console.log('Login Success')
+                                    })
+                                })
                             } else {
                                 res.render('login.ejs', {
                                     title: 'FUBAR | LOGIN',
@@ -134,12 +139,15 @@ app.get("/profile", (req, res) => {
     session=req.session;
     if(session.userid){
         con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, test3, fields) {
-            console.log(test3[0])
-            res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: test3});
-            console.log('Login Success')
+            con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, getForums, fields) {
+                con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, getFollowed, fields) {
+                    res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: test3, forums: getForums, followed: getFollowed});
+                    console.log('Login Success')
+                })
+            })
         })
     }else{
-        res.render("login.ejs", {title: "FUBAR | Login", message:""});
+        res.render("login.ejs", {title: "FUBA`R | Login", message:""});
     }
 });
 
@@ -212,15 +220,21 @@ app.post('/update', (req, res) =>{
     let newName = req.body.nameUpdate;
     let newPhone = req.body.phoneUpdate;
     let newCountry = req.body.countryUpdate;
+    let newBio = req.body.bioUpdate;
     //update DB
-    con.query( "UPDATE Profile_Info SET name = ?, phone = ?, country = ? WHERE user = ?",[newName, newPhone, newCountry, user], function (err, result) {
+    con.query( "UPDATE Profile_Info SET name = ?, phone = ?, country = ?, bio = ? WHERE user = ?",[newName, newPhone, newCountry, newBio, user], function (err, result) {
         if (err) throw err;
         console.log(result.affectedRows + " record(s) updated");
     });
     //refresh profile page to show updated info
+
     con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, test3, fields) {
-        res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: test3});
-        console.log('Login Success')
+        con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, getForums, fields) {
+            con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, getFollowed, fields) {
+                res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: test3, forums: getForums, followed: getFollowed});
+                console.log('Login Success')
+            })
+        })
     })
 
 });

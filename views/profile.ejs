@@ -385,7 +385,7 @@
                                         <img src="./images/Default.png" class="rounded-circle profImage" id="output" width="100">
                                     <%}%>
                                 </div>
-                                <input type="submit" value="Upload" />
+                                <input class='button button2'type="submit" value="Upload" />
                             </form>
 
                             <!--
@@ -394,7 +394,11 @@
 
                             <div class="mt-3">
                                 <h4 id="UN"><%= username %></h4>
-                                <p class="text-secondary mb-1">This user has not added a bio yet</p>
+                                <% if (data[0]['bio']){%>
+                                    <p><%= data[0]['bio']%></p>
+                                <% }else{%>
+                                    <p class="text-secondary mb-1">This user has not added a bio yet</p>
+                                <%}%>
                                 <button class="button button2">Follow</button>
                                 <button class="button button2" onclick="window.location.href = 'http://localhost:3000/DM'">Message</button>
                             </div>
@@ -571,6 +575,10 @@
                                     </label>
                                     <input type="text" id="countryUpdate" placeholder="Your country" name="countryUpdate" required>
 
+                                    <label for="bioUpdate">
+                                        <strong>Bio</strong>
+                                    </label>
+                                    <input type="text" id="bioUpdate" placeholder="Your bio" name="bioUpdate" required>
                                     <button type="submit" class="btn">Confirm Changes</button>
                                     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
                                 </form>
@@ -622,12 +630,44 @@
                                 <small></small>
                                 <div id="favForums">
                                     <!-- inserted buttons using js script -->
+                                    <% if (forums[0]['forumCount']){%>
+                                        <% if (forums[0]['forum1']){%>
+                                            <%= forums[0]['forum1'] %>
+                                        <% }else{%>
+                                            <div class="buttonDiv">
+                                                <button class="button button2"></button>
+                                            </div>
+                                        <%}%>
+                                        <% if (forums[0]['forum2']){%>
+                                            <%= forums[0]['forum2'] %>
+                                        <% }else{%>
+                                            <div class="buttonDiv">
+                                                <button class="button button2"></button>
+                                            </div>
+                                        <%}%>
+                                        <% if (forums[0]['forum3']){%>
+                                            <%= forums[0]['forum3'] %>
+                                        <% }else{%>
+                                            <div class="buttonDiv">
+                                                <button class="button button2"></button>
+                                            </div>
+                                        <%}%>
+                                        <% if (forums[0]['forum4']){%>
+                                            <%= forums[0]['forum4'] %>
+                                        <% }else{%>
+                                            <div class="buttonDiv">
+                                                <button class="button button2"></button>
+                                            </div>
+                                        <%}%>
+                                    <%}else{%>
+                                        <p>No followed forums</p>
+                                    <%}%>
                                 </div>
 
                                 <script>
                                     var con;
                                     var tempUser = document.getElementById("UN");
-                                    function fillFavForums(list) {
+                                    function fillFavForus(list) {
                                         list = ["Forum1", "Forum2", "Forum3", "Forum4"];
                                         for (const item in list) {
                                             var userButton = document.createElement("button");
@@ -676,7 +716,38 @@
                             <div class="card-body">
                                 <h6 class="d-flex align-items-center mb-3">Followed Users</h6>
                                 <div id="users">
-                                    <!-- inserted buttons using js script -->
+                                    <% if (followed[0]['forumCount']){%>
+                                        <% if (followed[0]['user1']){%>
+                                            <%= followed[0]['user1'] %>
+                                        <% }else{%>
+                                            <div class="buttonDiv">
+                                                <button class="button button2"></button>
+                                            </div>
+                                        <%}%>
+                                        <% if (followed[0]['user2']){%>
+                                            <%= followed[0]['user2'] %>
+                                        <% }else{%>
+                                            <div class="buttonDiv">
+                                                <button class="button button2"></button>
+                                            </div>
+                                        <%}%>
+                                        <% if (followed[0]['user3']){%>
+                                            <%= followed[0]['user3'] %>
+                                        <% }else{%>
+                                            <div class="buttonDiv">
+                                                <button class="button button2"></button>
+                                            </div>
+                                        <%}%>
+                                        <% if (followed[0]['user4']){%>
+                                            <%= followed[0]['user4'] %>
+                                        <% }else{%>
+                                            <div class="buttonDiv">
+                                                <button class="button button2"></button>
+                                            </div>
+                                        <%}%>
+                                    <%}else{%>
+                                        <p>No followed users</p>
+                                    <%}%>
                                 </div>
                             </div>
                         </div>
