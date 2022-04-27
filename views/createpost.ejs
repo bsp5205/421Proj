@@ -171,18 +171,11 @@
         <div class="main">
             <div class="subforumTitle">
                 <h1><%= data[0]['title'] %></h1>
-                <p><%= data[0]['tagline'] %></p>
-                <a href="/createPost"><button class="button button2">Create Post</button></a>
             </div>
-            <% for (i = (post.length - 1); i >= 0; i--){ %>
-                <div class="post">
-                    <h3><%= post[i]['title']%></h3>
-                    <p><%= post[i]['postcontent']%></p>
-                    <a><button class="button button2">Reply</button></a>
-                </div>
-            <% } %>
-        </div>
+            <form>
 
+            </form>
+        </div>
     </div>
     <div class="item4">
         <div class="favorites">
