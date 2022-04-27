@@ -170,10 +170,13 @@ app.get("/signup", (req,res) =>{
     res.render("signup.ejs", {title: "FUBAR | Sign Up", message: ''})
 });
 
-app.get("/post_name/:id", (req, res) => {
+app.get("/post-:id", (req, res) => {
     session=req.session;
+    var subID = req.params.id;
     if(session.userid){
-        res.render("post", {title:"FUBAR | Post Title", post_content:"Post content", username: user, path: myPath});
+        con.query('SELECT * from posts WHERE id = ?', [subID], function(error, posts, fields){
+            res.render("post", {title:"FUBAR | " + posts[0]['title'], username: user, path: myPath, post: posts});
+        })
     }else{
         res.render("login.ejs", {title: "FUBAR | Login", message:""});
     }
@@ -183,11 +186,10 @@ app.get("/register", (req, res) => {
     res.render("register.ejs", {title: "FUBAR | Register"});
 });
 
-app.get("/subforum/:title", (req, res) => {
+app.get("/subforum-:title", (req, res) => {
     var subID = req.params.title;
     con.query('SELECT * FROM subforums WHERE title = ?', [subID], function(error, subforum, fields) {
         con.query('SELECT * FROM posts WHERE subforumID = ?', [subforum[0]['id']], function(error, posts, fields) {
-            req.params.id = subforum[0]['id'];
             res.render("subforum.ejs", {title: "FUBAR | " + subforum[0]['title'], username: user, data: subforum, post: posts});
         })
     })
