@@ -170,7 +170,7 @@ app.get("/signup", (req,res) =>{
     res.render("signup.ejs", {title: "FUBAR | Sign Up", message: ''})
 });
 
-app.get("/post_name", (req, res) => {
+app.get("/post_name/:id", (req, res) => {
     session=req.session;
     if(session.userid){
         res.render("post", {title:"FUBAR | Post Title", post_content:"Post content", username: user, path: myPath});
@@ -183,17 +183,13 @@ app.get("/register", (req, res) => {
     res.render("register.ejs", {title: "FUBAR | Register"});
 });
 
-app.get("/subforum", (req, res) => {
-    con.query('SELECT * FROM subforums WHERE title = ?', ['FUBAR'], function(error, subforum, fields) {
+app.get("/subforum/:title", (req, res) => {
+    var subID = req.params.title;
+    con.query('SELECT * FROM subforums WHERE title = ?', [subID], function(error, subforum, fields) {
         con.query('SELECT * FROM posts WHERE subforumID = ?', [subforum[0]['id']], function(error, posts, fields) {
+            req.params.id = subforum[0]['id'];
             res.render("subforum.ejs", {title: "FUBAR | " + subforum[0]['title'], username: user, data: subforum, post: posts});
         })
-    })
-});
-
-app.get("/createPost", (req, res)=>{
-    con.query('SELECT * FROM subforums WHERE title = ?', ['FUBAR'], function(error, subforum, fields) {
-        res.render("createpost.ejs", {title: "FUBAR | " + subforum[0]['title'], username: user, data: subforum});
     })
 });
 
@@ -246,6 +242,10 @@ app.post('/update', (req, res) =>{
             })
         })
     })
+
+});
+
+app.post('/createpost', (req,res)=>{
 
 });
 
