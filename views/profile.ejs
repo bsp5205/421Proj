@@ -225,6 +225,10 @@
         opacity: 1;
     }
 
+    .container{
+        z-index: 0;
+    }
+
 </style>
 
 <!--style for changing profile picture-->
@@ -363,9 +367,16 @@
 <!--Script for uploading profile picture-->
 </script>
 
-<body onload = fillFavForums() ></body>
+<body onload = hide()></body>
 <body onload = ></body>
-
+<script>
+    function hide(){
+        var bar = document.getElementById("searchBar");
+        bar.style.display = 'none';
+        var topButton = document.getElementById('searchButton');
+        topButton.style.display = 'none';
+    }
+</script>
 <div class="container">
     <div class="main-body">
         <div class="row gutters-sm">

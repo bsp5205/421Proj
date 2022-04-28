@@ -10,6 +10,7 @@
         background-color: lightgray;
         border-bottom: #FF10F0;
         border-bottom-style: solid;
+        z-index: 0;
     }
     .topnav a.active {
         background-color: #2196F3;
@@ -63,14 +64,117 @@
         background-image: url("https://images.hdqwalls.com/wallpapers/vaporwave-zl.jpg");
     }
 </style>
+
+<style>
+    #list{
+        margin-bottom: 0;
+    }
+    #searchBar{
+        outline:none
+    }
+
+    li{
+        position: absolute;
+        z-index: 1000;
+    }
+    .animals {
+        position: relative;
+        display: none;
+        width: 100%;
+        background-color: white;
+        text-align: left;
+    }
+    .animals:hover{
+        background-image: linear-gradient(rgba(0, 0, 0, 0.4) 0 0);
+    }
+    .containerTest{
+        display: none;
+        width: 50%;
+        background: white;
+        position: absolute;
+        justify-content: center;
+        border: 1px solid rgba(118,118,118,255);
+        border-top: none;
+        margin-left: 334px;
+        margin-top: -3%;
+    }
+
+</style>
+
+<script>
+    function search_animal() {
+        let input = document.getElementById('searchBar').value
+        let cont = document.getElementsByClassName('containerTest');
+        cont[0].style.display="block";
+        input = input.toLowerCase();
+        let x = document.getElementsByClassName('animals');
+
+        for (i = 0; i < x.length; i++) {
+            if (!x[i].innerHTML.toLowerCase().includes(input)) {
+                x[i].style.display="none";
+            }
+            else {
+                x[i].style.display="block";
+            }
+        }
+
+        if(document.getElementById("searchBar").value.length == 0) {
+            cont[0].style.display="none";
+            for (i = 0;i < x.length; i++){
+                x[i].style.display = "none";
+            }
+        }
+    }
+
+
+    function testAlert(){
+        alert("you clicked a button");
+    }
+</script>
+
 <div class="topnav">
-    <button class="logoButton" onclick="window.location.href = 'http://localhost:3000/'"><image src="./images/Logo.png" height="100" width="auto" class="logo"></image></button>
+    <button class="logoButton" onclick="window.location.href = 'http://localhost:3000/'"><image src="./images/Logo.png" height="auto" width="200" class="logo"></image></button>
     <form class="myForum">
-        <input class="SearchBarInput" type="search" id="query" name="q" placeholder="Search...">
-        <button class="button button2">Search</button>
+        <input class="SearchBarInput" type="search" id="searchBar" oninput="search_animal()" placeholder="Search...">
+        <button class="button button2" id="searchButton">Search</button>
     </form>
     <div class="temp right">
         <a href="/profile"><button class="button button2" >Profile</button></a>
         <a href="/logout"><button class="button button2" >Log Out</button></a>
+    </div>
+    <div class="containerTest">
+        <div>
+            <button class="animals">Cat</button>
+        </div>
+        <div class="spacing">
+            <button class="animals">Dog</button>
+        </div>
+        <div class="spacing">
+            <button class="animals">Elephant</button>
+        </div>
+        <div class="spacing">
+            <button class="animals">Fish</button>
+        </div>
+        <div class="spacing">
+            <button class="animals">Gorilla</button>
+        </div>
+        <div class="spacing">
+            <button class="animals">Monkey</button>
+        </div>
+        <div class="spacing">
+            <button class="animals">Turtle</button>
+        </div>
+        <div class="spacing">
+            <button class="animals">Whale</button>
+        </div>
+        <div class="spacing">
+            <button class="animals">Aligator</button>
+        </div>
+        <div class="spacing">
+            <button class="animals">Donkey</button>
+        </div>
+        <div class="spacing">
+            <button class="animals">Horse</button>
+        </div>
     </div>
 </div>
