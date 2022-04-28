@@ -256,6 +256,19 @@ app.post('/createpost', (req,res)=>{
     });
 });
 
+app.post('/like', (req,res)=>{
+    console.log("likes your post");
+    con.query("SELECT * FROM posts WHERE id = ?", [1], function(err,result1){
+        console.log(result1[0]['likes']);
+        let x = result1[0]['likes'] + 1;
+        con.query("UPDATE posts SET likes = ? WHERE id = ?", [x , 1], function(err,result){
+            if(err) throw err;
+                console.log(result.affectedRows + "record(s) updated");
+        });
+    });
+
+});
+
 app.post('/updateGitHub', (req, res) =>{
     console.log("Updating GitHub");
     let newGitHub = req.body.GHEdit;
