@@ -380,7 +380,7 @@
                                     </label>
                                     <input id='file' type="file" name="profile-file" required onchange="loadFile(event)"/>
                                     <% if (data[0]['profilePicLink']){%>
-                                        <img src=<%= data[0]['profilePicLink']%> class="rounded-circle profImage" id="output" width="100">
+                                        <img src="<%= data[0]['profilePicLink']%>" class="rounded-circle profImage" id="output" width="100">
                                     <% }else{%>
                                         <img src="./images/Default.png" class="rounded-circle profImage" id="output" width="100">
                                     <%}%>
