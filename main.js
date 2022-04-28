@@ -48,9 +48,6 @@ app.post('/login', (req, res) => {
                 // Decrypt the password
                 bcrypt.compare(pass, results[0].pass, function(error, result) {
                     if (error) throw error
-                    console.log(pass)
-                    console.log(results[0].pass)
-                    console.log(result)
                     if (result) { // If compare is successful
                         con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, test, fields) {
                             if (results.length > 0) {
@@ -59,7 +56,6 @@ app.post('/login', (req, res) => {
                                 con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, getForums, fields) {
                                     con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, getFollowed, fields) {
                                         res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: test, forums: getForums, followed: getFollowed});
-                                        console.log('Login Success')
                                     })
                                 })
                             } else {
@@ -68,7 +64,6 @@ app.post('/login', (req, res) => {
                                     message: 'USER OR PASSWORD INCORRECT'
                                 });
                             }
-                            console.log('Login Success')
                         })
                     }
                     else { // Password invalid
@@ -108,14 +103,14 @@ app.post('/signup', (req, res) => {
                     bcrypt.hash(pass, 10, function(err, hash) {
                         if (err) throw err
                         con.query('INSERT INTO login (email, user, pass) VALUES (?,?,?)', [email, user, hash])
+                        con.query("INSERT INTO Profile_Info (user, name, email, phone, country, github, twitter, insta, facebook, profilePicLink, bio) VALUES (? , 'Name', ?, '123-456-7890', 'country', 'github', 'twitter', 'instagram', 'facebook', './images/cypher_pic.jpg', 'User has no bio yet.')", [user, email])
                         
                     });
 
-
-                    //res.render('profile.ejs', {title: "FUBAR | ${user}", username: user})
+                    // Direct them to login
+                    res.render('login.ejs', {title: 'FUBAR | Login', message: ''})
+                    
                 }
-            
-                res.send()
             })
     }
 }})
@@ -142,12 +137,11 @@ app.get("/profile", (req, res) => {
             con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, getForums, fields) {
                 con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, getFollowed, fields) {
                     res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: test3, forums: getForums, followed: getFollowed});
-                    console.log('Login Success')
                 })
             })
         })
     }else{
-        res.render("login.ejs", {title: "FUBA`R | Login", message:""});
+        res.render("login.ejs", {title: "FUBAAR | Login", message:""});
     }
 });
 
@@ -176,7 +170,13 @@ app.get("/post-:id", (req, res) => {
     if(session.userid){
         con.query('SELECT * from posts WHERE id = ?', [subID], function(error, posts, fields){
             res.render("post", {title:"FUBAR | " + posts[0]['title'], username: user, path: myPath, post: posts});
-        })
+                var x = posts[0]['id'];
+                console.log(x);
+
+        }
+
+        )
+
     }else{
         res.render("login.ejs", {title: "FUBAR | Login", message:""});
     }
@@ -248,7 +248,12 @@ app.post('/update', (req, res) =>{
 });
 
 app.post('/createpost', (req,res)=>{
-
+    console.log("making post");
+    let newPost = req.body.postmsg;
+    con.query("UPDATE posts SET postcontent = ?, user = ?, filled =? WHERE id = ?", [newPost,user, 1, 1], function (err, result) {
+        if (err) throw err;
+        console.log(result.affectedRows + "record(s) updated");
+    });
 });
 
 app.post('/updateGitHub', (req, res) =>{
@@ -325,4 +330,3 @@ app.post('/profile-upload-single', upload.single('profile-file'), function (req,
 
     //return res.send(response)
 })
-
