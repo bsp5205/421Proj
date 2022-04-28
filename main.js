@@ -170,7 +170,13 @@ app.get("/post-:id", (req, res) => {
     if(session.userid){
         con.query('SELECT * from posts WHERE id = ?', [subID], function(error, posts, fields){
             res.render("post", {title:"FUBAR | " + posts[0]['title'], username: user, path: myPath, post: posts});
-        })
+                var x = posts[0]['id'];
+                console.log(x);
+
+        }
+
+        )
+
     }else{
         res.render("login.ejs", {title: "FUBAR | Login", message:""});
     }
@@ -242,7 +248,12 @@ app.post('/update', (req, res) =>{
 });
 
 app.post('/createpost', (req,res)=>{
-
+    console.log("making post");
+    let newPost = req.body.postmsg;
+    con.query("UPDATE posts SET postcontent = ?, user = ?, filled =? WHERE id = ?", [newPost,user, 1, 1], function (err, result) {
+        if (err) throw err;
+        console.log(result.affectedRows + "record(s) updated");
+    });
 });
 
 app.post('/updateGitHub', (req, res) =>{
