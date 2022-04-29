@@ -5,78 +5,8 @@
 <body>
 
 <style>
-
-    .topnav{
-        overflow: hidden;
-        background-color: lightgray;
-        border-bottom: #FF10F0;
-        border-bottom-style: solid;
-        z-index: 0;
-    }
-    .topnav a.active {
-        background-color: #2196F3;
-        color: white;
-    }
-    .temp{
-        padding-top: 27px;
-        margin-right: 30px;
-        float: right;
-        display: inline;
-        color: black;
-        text-align: center;
-        text-decoration: none;
-        font-size: 17px;
-    }
-    .myForum{
-        display: inline;
-        margin-left: 100px;
-    }
-    .SearchBarInput {
-        width: 50%;
-    }
-    .button {
-        background-color: rgb(54, 54, 54);
-        border: none;
-        color: white;
-        padding: 5px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        -webkit-transition-duration: 0.4s; /* Safari */
-        transition-duration: 0.4s;
-    }
-    .button2:hover {
-        box-shadow: 0 12px 16px 0 rgba(0,255,255,0.5),0 17px 50px 0 rgba(0,255,255,0.19);
-    }
-    .logo{
-        margin-left: 30px;
-    }
-    .logoButton{
-        background-color: lightgray;
-        border: none;
-    }
-    .right{
-        padding-right: 30px;
-    }
     body{
         background-image: url("https://images.hdqwalls.com/wallpapers/vaporwave-zl.jpg");
-    }
-</style>
-
-<style>
-    #list{
-        margin-bottom: 0;
-    }
-    #searchBar{
-        outline:none
-    }
-
-    li{
-        position: absolute;
-        z-index: 1000;
     }
     .animals {
         position: relative;
@@ -96,8 +26,55 @@
         justify-content: center;
         border: 1px solid rgba(118,118,118,255);
         border-top: none;
-        margin-left: 334px;
-        margin-top: -3%;
+        left: 25%;
+
+    }
+    .centerTest{
+        display: flex;
+        justify-content: center;
+    }
+    .bar{
+        background-color: lightgray;
+
+    }
+    .imgButton{
+        display: flex;
+        margin-left: 2%;
+    }
+    .img{
+        width: 150px;
+        background-color: lightgray;
+    }
+    #searchBar{
+        width: 45%;
+    }
+    #searchButton{
+        width: 5%;
+        background-color: rgb(54, 54, 54);
+        color: white;
+        font-size: 16px;
+        margin: 4px 2px;
+        padding: 5px 20px;
+    }
+    .right{
+        float: right;
+    }
+    .button {
+        background-color: rgb(54, 54, 54);
+        border: none;
+        color: white;
+        padding: 5px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+    }
+    .button2:hover {
+        box-shadow: 0 12px 16px 0 rgba(0,255,255,0.5),0 17px 50px 0 rgba(0,255,255,0.19);
     }
 
 </style>
@@ -132,16 +109,17 @@
         alert("you clicked a button");
     }
 </script>
-<div class="topnav">
-    <button class="logoButton" onclick="window.location.href = 'http://localhost:3000/'"><image src="./images/Logo.png" height="auto" width="200" class="logo"></image></button>
-    <form class="myForum">
-        <input class="SearchBarInput" type="search" id="searchBar" oninput="search_animal()" placeholder="Search...">
-        <button class="button button2">Search</button>
-    </form>
-    <div class="temp right">
-        <a href="/login"><button class="button button2">Login</button></a>
-        <a href="/signup"><button class="button button2">Sign up</button></a>
+<div class="bar">
+    <div class="right">
+        <a href="/login"><button class='button button2'>Login</button></a>
+        <a href="/signup"><button class='button button2'>Sign up</button></a>
     </div>
+    <button class='imgButton' onclick="window.location.href = 'http://localhost:3000/'"><image class='img' src="./images/Logo.png"></image></button>
+    <div class="centerTest">
+        <input type="search" id="searchBar" oninput="search_animal()" placeholder="Search...">
+        <button class='button2' id="searchButton">Search</button>
+    </div>
+
     <div class="containerTest">
         <div>
             <button class="animals">Cat</button>
