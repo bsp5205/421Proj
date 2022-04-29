@@ -36,6 +36,7 @@
         position: absolute;
         align-items: center;
         top: 2.5%;
+        z-index: 1 !important;
     }
     .bar{
         background-color: lightgrey;
@@ -44,7 +45,8 @@
     .imgButton{
         display: flex;
         margin-left: 2%;
-        z-index: 1000000000 !important;
+        z-index: 2 !important;
+        position: relative;
     }
     .img{
         width: 150px;
@@ -63,6 +65,8 @@
         color: white;
         font-size: 14px;
         margin-bottom: 2%;
+        z-index: 2 !important;
+        position: relative;
     }
     .right{
         float: right;
@@ -80,7 +84,8 @@
         cursor: pointer;
         -webkit-transition-duration: 0.4s; /* Safari */
         transition-duration: 0.4s;
-        z-index: 100000 !important;
+        z-index: 2 !important;
+        position: relative;
     }
     .button2:hover {
         box-shadow: 0 12px 16px 0 rgba(0,255,255,0.5),0 17px 50px 0 rgba(0,255,255,0.19);
