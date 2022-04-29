@@ -205,25 +205,37 @@
     </div>
     <div class="item4">
         <% if (username){%>
-            <label>Favorites</label>
-            <div class="favorites">
-                <p>Title 1</p>
-                <button class="blockRight">Block Button</button>
-            </div>
-            <div class="favorites">
-                <p>Title 2</p>
-                <button class="blockRight">Block Button</button>
-            </div>
-            <div class="favorites">
-                <p>Title 3</p>
-                <button class="blockRight">Block Button</button>
-            </div>
-            <div class="favorites">
-                <p>Title 4</p>
-                <button class="blockRight">Block Button</button>
-            </div>
-        <% } else { %>
+            <% if (followedForums[0]['forumCount']){%>
+                <label>Favorites</label>
+                <div class="favorites">
+                    <% if (followedForums[0]['forum1']){%>
+                    <p><%=followedForums[0]['forum1']%></p>
+                    <button class="blockRight">Block Button</button>
+                    <% } %>
+                </div>
+                <div class="favorites">
+                    <% if (followedForums[0]['forum2']){%>
+                    <p><%=followedForums[0]['forum2']%></p>
+                    <button class="blockRight">Block Button</button>
+                    <% } %>
+                </div>
+                <div class="favorites">
+                    <% if (followedForums[0]['forum3']){%>
+                    <p><%=followedForums[0]['forum3']%></p>
+                    <button class="blockRight">Block Button</button>
+                    <% } %>
+                </div>
+                <div class="favorites">
+                    <% if (followedForums[0]['forum4']){%>
+                    <p><%=followedForums[0]['forum4']%></p>
+                    <button class="blockRight">Block Button</button>
+                    <% } %>
+                </div>
+            <% } else { %>
+                    <p>No followed Forums</p>
+            <% } %>
+        <%}else{%>
                 <p>Login to view followed forums</p>
-        <% } %>
+        <%}%>
     </div>
 </div>

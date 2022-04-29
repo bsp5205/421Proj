@@ -119,11 +119,9 @@ app.use(express.static(path.join(__dirname,'public')));
 
 app.get("/", function(req,res){
     session=req.session;
-    if(session.userid){
-        res.render("index", {title:"FUBAR | Home", message:"This is a message", username: user});
-    }else{
-        res.render("index", {title:"FUBAR | Home", message:"This is a message", username: user});
-    }
+    con.query('SELECT * FROM followed_forums WHERE user = ?', [user], function(error, getFollowedForums, fields) {
+        res.render("index", {title:"FUBAR | Home", message:"This is a message", username: user, followedForums: getFollowedForums});
+    })
 });
 
 app.get("/login", (req, res) => {
@@ -173,9 +171,7 @@ app.get("/post-:id", (req, res) => {
                 var x = posts[0]['id'];
                 console.log(x);
 
-        }
-
-        )
+        })
 
     }else{
         res.render("login.ejs", {title: "FUBAR | Login", message:""});
