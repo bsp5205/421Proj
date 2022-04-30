@@ -281,7 +281,24 @@ app.post('/like', (req,res)=>{
     });
 });
 
-
+app.post('/dislike', (req,res)=>{
+    console.log("dislikes your post");
+    con.query("SELECT * FROM posts WHERE id = ?", [1], function(err,result1){
+        console.log(result1[0]['dislikes']);
+        let x = result1[0]['dislikes'] + 1;
+        con.query("UPDATE posts SET dislikes = ? WHERE id = ?", [x , 1], function(err,result){
+            console.log("result" + result);
+            con.query('SELECT * FROM posts WHERE id = ?',[1], function(err, getPost) {
+                console.log("getPOST: " + getPost);
+                con.query('SELECT * FROM Comments WHERE Postid = ?',[getPost[0]['id']], function(err, Comments){
+                    res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments});
+                });
+            });
+            if(err) throw err;
+            console.log(result.affectedRows + "record(s) updated");
+        });
+    });
+});
 
 app.post('/comment', (req,res)=>{
     console.log("making post");

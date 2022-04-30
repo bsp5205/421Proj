@@ -203,6 +203,12 @@
         border-top-color: transparent;
     }
 
+    .likePost{
+        display: inline;
+    }
+
+
+
 </style>
 
 <script>
@@ -221,6 +227,7 @@
 
         }else{
             document.getElementById('likePost').remove();
+            document.getElementById('dislikePost').remove();
 
         }
     }
@@ -347,9 +354,14 @@
                         var test = '<%=username%>';
                     </script>
                 </form>
-                <form id="likePost" method="post" action="http://localhost:3000/like">
-                    <input id="likePost" type="submit" class="button button2" value="like">
-                    <div>Likes: <%=post[0]['likes']%></div>
+                <form id="likePost" class="likePost" method="post" action="http://localhost:3000/like">
+                    <input id="likePost" type="submit" class="button button2" value="Upvote">
+
+                </form>
+
+                <form id="dislikePost" class="likePost" method="post" action="http://localhost:3000/dislike">
+                    <input id="dislikePost" type="submit" class="button button2" value="Downvote">
+                    <a id="dislikePost"> Upvotes: <%=post[0]['likes']%> Downvotes: <%=post[0]['dislikes']%> </a>
                 </form>
 
             </div>
