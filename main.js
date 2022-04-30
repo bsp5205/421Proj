@@ -167,8 +167,12 @@ app.get("/post-:id", (req, res) => {
     var subID = req.params.id;
     if(session.userid){
         con.query('SELECT * from posts WHERE id = ?', [subID], function(error, posts, fields){
-            res.render("post", {title:"FUBAR | " + posts[0]['title'], username: user, path: myPath, post: posts});
-                var x = posts[0]['id'];
+            con.query('SELECT * FROM posts WHERE id = ?',[1], function(err, getPost) {
+                console.log("getPOST: " + getPost);
+                con.query('SELECT * FROM Comments WHERE Postid = ?',[getPost[0]['id']], function(err, Comments){
+                    res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments});
+                });
+            });                var x = posts[0]['id'];
                 console.log(x);
 
         })
@@ -247,6 +251,12 @@ app.post('/createpost', (req,res)=>{
     console.log("making post");
     let newPost = req.body.postmsg;
     con.query("UPDATE posts SET postcontent = ?, user = ?, filled =? WHERE id = ?", [newPost,user, 1, 1], function (err, result) {
+        con.query('SELECT * FROM posts WHERE id = ?',[1], function(err, getPost) {
+            console.log("getPOST: " + getPost);
+            con.query('SELECT * FROM Comments WHERE Postid = ?',[getPost[0]['id']], function(err, Comments){
+                res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments});
+            });
+        });
         if (err) throw err;
         console.log(result.affectedRows + "record(s) updated");
     });
@@ -258,12 +268,35 @@ app.post('/like', (req,res)=>{
         console.log(result1[0]['likes']);
         let x = result1[0]['likes'] + 1;
         con.query("UPDATE posts SET likes = ? WHERE id = ?", [x , 1], function(err,result){
+            console.log("result" + result);
+            con.query('SELECT * FROM posts WHERE id = ?',[1], function(err, getPost) {
+                console.log("getPOST: " + getPost);
+                con.query('SELECT * FROM Comments WHERE Postid = ?',[getPost[0]['id']], function(err, Comments){
+                    res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments});
+                });
+            });
             if(err) throw err;
-                console.log(result.affectedRows + "record(s) updated");
+            console.log(result.affectedRows + "record(s) updated");
         });
     });
-
 });
+
+
+
+app.post('/comment', (req,res)=>{
+    console.log("making post");
+    let newPost = req.body.msg;
+    con.query("INSERT INTO Comments (Postid, user, commentcontent, filled) VALUES (?, ?, ?, ?)",[1, user, newPost, 1], function (err, result) {
+        con.query('SELECT * FROM posts WHERE id = ?',[1], function(err, getPost) {
+            con.query('SELECT * FROM Comments WHERE Postid = ?',[1], function(err, getComment) {
+                console.log("getPOST: " + getPost);
+                res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: getComment});
+            });
+        });
+        if (err) throw err;
+        console.log(result.affectedRows + "record(s) updated");
+    });
+})
 
 app.post('/updateGitHub', (req, res) =>{
     console.log("Updating GitHub");

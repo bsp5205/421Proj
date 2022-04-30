@@ -184,13 +184,23 @@
         font-size: 16px;
     }
     .usertest{
-        font-size: 20px;
-        text-decoration: underline;
+
     }
 
     .postcontents{
         font-size: 20px;
         text-indent: 4%;
+    }
+
+    .content1{
+        border-style: solid;
+        border-color: black;
+    }
+
+    .content2{
+        border-style: solid;
+        border-color: black;
+        border-top-color: transparent;
     }
 
 </style>
@@ -215,6 +225,7 @@
         }
     }
 
+
     function formCall(message, cont){
         postMessage(message, cont);
         var param = document.getElementById("Form");
@@ -227,13 +238,14 @@
         param.appendChild(button).click();
         //if it was prevented, make sure we don't get a build up of buttons
         param.removeChild(button);
+        document.location.reload();
     }
 
     function like(param){
         console.log(param)
-            var likes = parseInt(document.getElementById(param).innerHTML);
-            likes += 1;
-            document.getElementById(param).innerHTML = likes;
+        var likes = parseInt(document.getElementById(param).innerHTML);
+        likes += 1;
+        document.getElementById(param).innerHTML = likes;
     }
 
     function postMessage(message , param){
@@ -321,9 +333,9 @@
     <div class="item3">
         <div class="main">
             <div class="post">
-                <h1><%= title %></h1>
+                <h1><%= post[0]['title'] %></h1>
                 <div class="postcontent" id="postCont">
-                    <p class="usertest"><%=post[0]['user']%></p>
+                    <h2 class="usertest"><%=post[0]['user']%></h2>
                     <div class="postcontents"><%= post[0]['postcontent'] %></div>
                     <p id="bin"><%=post[0]['filled']%></p>
                 </div>
@@ -335,21 +347,34 @@
                         var test = '<%=username%>';
                     </script>
                 </form>
-                <form method="post" action="http://localhost:3000/like">
+                <form id="likePost" method="post" action="http://localhost:3000/like">
                     <input id="likePost" type="submit" class="button button2" value="like">
-                <div>Likes: <%=post[0]['likes']%></div>
+                    <div>Likes: <%=post[0]['likes']%></div>
                 </form>
 
             </div>
-                <p>Comments</p>
-                <div class="comment">
+            <p>Comments</p>
+            <div class="comment">
 
-                <p><div id="cont" class="content">
+                <p>
+                <div id="cont" class="content">
+                    <div class="content1">
+                        <h3><a><%= Comments[0]['user']%></a></h3>
+                        <p><%= Comments[0]['commentcontent']%></p>
+
                     </div>
+                    <% for (i = 1; i < Comments.length; i++){ %>
+                        <div class="content2">
+                            <h3><a><%= Comments[i]['user']%></a></h3>
+                            <p><%= Comments[i]['commentcontent']%></p>
+                        </div>
+                    <% } %>
+
+                </div>
                 </p>
-                <form id="myForm" class="centered">
-                    <input type="text" id="msg" class="textBoxSize">
-                    <input type="submit" class="button button2" value="reply" onclick="postMessage(document.getElementById('msg').value, 'cont')">
+                <form id="myForm" class="centered" method="post" action="http://localhost:3000/comment">
+                    <input type="text" id="msg" name="msg" class="textBoxSize">
+                    <input type="submit" class="button button2" value="reply">
                     <script>
                         var test = '<%=username%>';
                     </script>
@@ -378,5 +403,3 @@
     </div>
 </div>
 </body>
-
-
