@@ -256,12 +256,12 @@ app.post('/update', (req, res) =>{
 
 app.post('/createpost-:id', (req,res)=>{
     console.log("making post");
-    var subID = req.params.id;
-    let newPost = req.body.postmsg;
-    con.query('SELECT * from posts WHERE id = ?', [subID], function(err, posts, fields) {
+    var subID = req.params.id; //get the post id from url
+    let newPost = req.body.postmsg; //get the post content from the text bar
+    con.query('SELECT * from posts WHERE id = ?', [subID], function(err, posts, fields) {//query for the post with this id
         var x = posts[0]['id'];
-        con.query("UPDATE posts SET postcontent = ?, user = ?, filled =? WHERE id = ?", [newPost, user, 1, subID], function (err, result) {
-            con.query('SELECT * FROM posts WHERE id = ?', [x], function (err, getPost) {
+        con.query("UPDATE posts SET postcontent = ?, user = ?, filled =? WHERE id = ?", [newPost, user, 1, subID], function (err, result) {//update the table
+            con.query('SELECT * FROM posts WHERE id = ?', [x], function (err, getPost) {//query posts and comments to reload the page
                 console.log("getPOST: " + getPost);
                 con.query('SELECT * FROM Comments WHERE Postid = ?', [getPost[0]['id']], function (err, Comments) {
                     res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments});
@@ -276,14 +276,14 @@ app.post('/createpost-:id', (req,res)=>{
 
 app.post('/like-:id', (req,res)=>{
     console.log("likes your post");
-    var subID = req.params.id
+    var subID = req.params.id//get the id from the url
     con.query('SELECT * from posts WHERE id = ?', [subID], function(err, posts, fields){
-        con.query("SELECT * FROM posts WHERE id = ?", [subID], function(err,result1) {
+        con.query("SELECT * FROM posts WHERE id = ?", [subID], function(err,result1) {//query to get the number of likes on the post
             console.log(result1[0]['likes']);
-            let x = result1[0]['likes'] + 1;
-            con.query("UPDATE posts SET likes = ? WHERE id = ?", [x, subID], function (err, result) {
+            let x = result1[0]['likes'] + 1;//calculate new like total
+            con.query("UPDATE posts SET likes = ? WHERE id = ?", [x, subID], function (err, result) {//update the likes
                 console.log("result" + result);
-                con.query('SELECT * FROM posts WHERE id = ?', [subID], function (err, getPost) {
+                con.query('SELECT * FROM posts WHERE id = ?', [subID], function (err, getPost) {//query posts and comments to reload the page
                     console.log("getPOST: " + getPost);
                     con.query('SELECT * FROM Comments WHERE Postid = ?', [getPost[0]['id']], function (err, Comments) {
                         res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments});
@@ -296,7 +296,7 @@ app.post('/like-:id', (req,res)=>{
     });
 });
 
-app.post('/dislike-:id', (req,res)=>{
+app.post('/dislike-:id', (req,res)=>{//same as the like endpoint but it counts downvotes now
     console.log("dislikes your post");
     var subID = req.params.id
     con.query("SELECT * FROM posts WHERE id = ?", [subID], function(err,result1){
@@ -318,10 +318,10 @@ app.post('/dislike-:id', (req,res)=>{
 
 app.post('/comment-:id', (req,res)=>{
     console.log("making post");
-    var subID = req.params.id
-    let newPost = req.body.msg;
-    con.query("INSERT INTO Comments (Postid, user, commentcontent, filled) VALUES (?, ?, ?, ?)",[subID, user, newPost, 1], function (err, result) {
-        con.query('SELECT * FROM posts WHERE id = ?',[subID], function(err, getPost) {
+    var subID = req.params.id//get post id from url
+    let newPost = req.body.msg;//get content from text box
+    con.query("INSERT INTO Comments (Postid, user, commentcontent, filled) VALUES (?, ?, ?, ?)",[subID, user, newPost, 1], function (err, result) {//insert the comment into the post with the taken id
+        con.query('SELECT * FROM posts WHERE id = ?',[subID], function(err, getPost) {//query posts and comments to reload the page
             con.query('SELECT * FROM Comments WHERE Postid = ?',[subID], function(err, getComment) {
                 console.log("getPOST: " + getPost);
                 res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: getComment});
