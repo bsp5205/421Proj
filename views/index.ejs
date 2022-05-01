@@ -163,8 +163,7 @@
                 <% for (i = 4; i >= 0; i--){ %>
                     <% j = Math.floor(Math.random() * post.length)%>
                         <div class="trending">
-                            <p><%= post[j]['title'] %></p>
-                            <button class="blockTrending" onclick="window.location.href = 'http://localhost:3000/post-<%= post[j]['id'] %>'">Block Button</button>
+                            <button class="blockTrending" onclick="window.location.href = 'http://localhost:3000/post-<%= post[j]['id'] %>'"><%= post[j]['title'] %></button>
                         </div>
                 <% } %>
     </div>

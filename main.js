@@ -119,9 +119,11 @@ app.use(express.static(path.join(__dirname,'public')));
 
 app.get("/", function(req,res){
     session=req.session;
-    con.query('SELECT * FROM posts', function(error, posts, fields){
-        con.query('SELECT * FROM followed_forums WHERE user = ?', [user], function(error, getFollowedForums, fields) {
-            res.render("index", {title:"FUBAR | Home", message:"This is a message", username: user, post: posts, followedForums: getFollowedForums});
+    con.query('SELECT * FROM subforums', function(error, subforum, fields){
+        con.query('SELECT * FROM posts', function(error, posts, fields){
+            con.query('SELECT * FROM followed_forums WHERE user = ?', [user], function(error, getFollowedForums, fields) {
+                res.render("index", {title:"FUBAR | Home", message:"This is a message", username: user, forum: subforum, post: posts, followedForums: getFollowedForums});
+            })
         })
     })
 });
