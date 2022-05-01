@@ -102,9 +102,10 @@
     .trending{
         display: block;
         margin: auto;
+        text-align: center;
     }
     .trending > p{
-        font-size: 20px;
+        font-size: 15px;
         margin-bottom: 0;
     }
     .favorites{
@@ -158,26 +159,14 @@
 <div class="background"></div>
 <div class="grid-container">
     <div class="item1 centered">
-            <div class="trending">
-                <p>Title</p>
-                <button class="blockTrending">Block Button</button>
-            </div>
-            <div class="trending">
-                <p>Title</p>
-                <button class="blockTrending">Block Button</button>
-            </div>
-            <div class="trending">
-                <p>Title</p>
-                <button class="blockTrending">Block Button</button>
-            </div>
-            <div class="trending">
-                <p>Title</p>
-                <button class="blockTrending">Block Button</button>
-            </div>
-            <div class="trending">
-                <p>Title</p>
-                <button class="blockTrending">Block Button</button>
-            </div>
+        <h3>Trending Posts</h3>
+                <% for (i = 4; i >= 0; i--){ %>
+                    <% j = Math.floor(Math.random() * post.length)%>
+                        <div class="trending">
+                            <p><%= post[j]['title'] %></p>
+                            <button class="blockTrending" onclick="window.location.href = 'http://localhost:3000/post-<%= post[j]['id'] %>'">Block Button</button>
+                        </div>
+                <% } %>
     </div>
     <div class="item2">
         <div class="img-size">
@@ -186,7 +175,6 @@
     </div>
     <div class="item3">
         <p>From popular forums:</p>
-
             <% for (i = 3; i >= 0; i--){ %>
                 <% j = Math.floor(Math.random() * post.length)%>
             <div class="main">
