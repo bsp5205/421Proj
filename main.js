@@ -319,6 +319,7 @@ app.post('/comment', (req,res)=>{
     });
 })
 
+//updates github in DB
 app.post('/updateGitHub', (req, res) =>{
     console.log("Updating GitHub");
     let newGitHub = req.body.GHEdit;
@@ -328,6 +329,7 @@ app.post('/updateGitHub', (req, res) =>{
     });
 });
 
+//updates twitter in DB
 app.post('/updateTwitter', (req, res) =>{
     console.log("Updating Twitter");
     let newTwitter = req.body.TwitterEdit;
@@ -337,6 +339,7 @@ app.post('/updateTwitter', (req, res) =>{
     });
 });
 
+//updates insta in DB
 app.post('/updateInsta', (req, res) =>{
     console.log("Updating Instagram");
     let newGitHub = req.body.InstaEdit;
@@ -346,6 +349,7 @@ app.post('/updateInsta', (req, res) =>{
     });
 });
 
+//updates facebook in DB
 app.post('/updateFacebook', (req, res) =>{
     console.log("Updating Facebook");
     let newFacebook = req.body.FBEdit;
@@ -356,6 +360,7 @@ app.post('/updateFacebook', (req, res) =>{
     });
 });
 
+//save the profile picture to local storage
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/images')
@@ -372,6 +377,7 @@ app.get("/", (req, res) => {
     res.render("index.ejs", {title: "FUBAR | Login"});
 });
 
+//will get the profile picture from the user, save the profile picture to local storage, sanitize the link, and save the link into the DB
 var profPicPath;
 app.post('/profile-upload-single', upload.single('profile-file'), function (req, res, next) {
     // req.file is the `profile-file` file
