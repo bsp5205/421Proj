@@ -186,22 +186,16 @@
     </div>
     <div class="item3">
         <p>From popular forums:</p>
-        <div class="main">
-            <p>Title 1</p>
-            <button class="block" onclick="window.location.href = 'http://localhost:3000/post_name'">Block Button</button>
-        </div>
-        <div class="main">
-            <p>Title 2</p>
-            <button class="block" onclick="window.location.href = 'http://localhost:3000/post_name'">Block Button</button>
-        </div>
-        <div class="main">
-            <p>Title 3</p>
-            <button class="block" onclick="window.location.href = 'http://localhost:3000/post_name'">Block Button</button>
-        </div>
-        <div class="main">
-            <p>Title 4</p>
-            <button class="block" onclick="window.location.href = 'http://localhost:3000/post_name'">Block Button</button>
-        </div>
+
+            <% for (i = 3; i >= 0; i--){ %>
+                <% j = Math.floor(Math.random() * post.length)%>
+            <div class="main">
+                <button class="block" onclick="window.location.href = 'http://localhost:3000/post-<%= post[j]['id'] %>'">
+                    <h3><a href="/post-<%= post[j]['id'] %>"><%= post[j]['title']%></a></h3>
+                    <p><%= post[j]['postcontent']%></p>
+                </button>
+            </div>
+            <% } %>
     </div>
     <div class="item4">
         <% if (username){%>
