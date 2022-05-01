@@ -230,7 +230,6 @@
     }
 
 </style>
-
 <!--style for changing profile picture-->
 <style>
     .profile-pic {
@@ -364,11 +363,9 @@
 
     }
 </script>
-<!--Script for uploading profile picture-->
-</script>
 
 <body onload = hide()></body>
-<body onload = ></body>
+<!--Script for hiding searchbar-->
 <script>
     function hide(){
         var bar = document.getElementById("searchBar");
@@ -377,6 +374,7 @@
         topButton.style.display = 'none';
     }
 </script>
+
 <div class="container">
     <div class="main-body">
         <div class="row gutters-sm">
@@ -398,10 +396,6 @@
                                 </div>
                                 <input class='button button2'type="submit" value="Upload" />
                             </form>
-
-                            <!--
-                            <button class="profButton"><img src="./images/Default.png" class="rounded-circle profImage" width="150" id="output"></button>
-                            -->
 
                             <div class="mt-3">
                                 <h4 id="UN"><%= username %></h4>
@@ -674,51 +668,6 @@
                                         <p>No followed forums</p>
                                     <%}%>
                                 </div>
-
-                                <script>
-                                    var con;
-                                    var tempUser = document.getElementById("UN");
-                                    function fillFavForus(list) {
-                                        list = ["Forum1", "Forum2", "Forum3", "Forum4"];
-                                        for (const item in list) {
-                                            var userButton = document.createElement("button");
-                                            userButton.classList.add("button");
-                                            userButton.classList.add("button2");
-                                            var link = "http://localhost:3000/";
-                                            userButton.onclick = function getUrl(url) {
-                                                window.open(link, '_blank')
-                                            }
-                                            userButton.classList.add("userButtons");
-                                            userButton.textContent = list[item];
-                                            var div = document.createElement("div");
-                                            div.classList.add("buttonDiv");
-                                            div.appendChild(userButton);
-                                            var outerDiv = document.getElementById("favForums");
-                                            outerDiv.appendChild(div);
-                                        }
-                                        list = ["User1", "User2", "User3", "User4"];
-                                        for (const item in list) {
-                                            var userButton = document.createElement("button");
-                                            userButton.classList.add("button");
-                                            userButton.classList.add("button2");
-                                            var link = "http://localhost:3000/";
-                                            userButton.onclick = function getUrl(url){
-                                                window.open(link,  '_blank')
-                                            }
-                                            userButton.classList.add("userButtons");
-                                            userButton.textContent = list[item];
-                                            var div = document.createElement("div");
-                                            div.classList.add("buttonDiv");
-                                            div.appendChild(userButton);
-                                            var outerDiv = document.getElementById("users");
-                                            outerDiv.appendChild(div);
-                                        }
-
-                                        tempUser = sessionStorage.getItem('tempUser');
-                                        tempUser = JSON.parse(tempUser);
-                                    }
-                                </script>
-
                             </div>
                         </div>
                     </div>
