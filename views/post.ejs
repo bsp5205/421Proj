@@ -192,15 +192,22 @@
         text-indent: 4%;
     }
 
+
     .content1{
         border-style: solid;
-        border-color: black;
+        border-color: transparent;
     }
 
     .content2{
         border-style: solid;
         border-color: black;
         border-top-color: transparent;
+    }
+
+    .content3{
+        border-style: solid;
+        border-color: transparent;
+        border-top-color: black;
     }
 
     .likePost{
@@ -220,6 +227,7 @@
 
     function elementDelete(){
         console.log("deletes your element");
+        document.getElementById('content1').remove();
         if( document.getElementById('bin').innerHTML == 1){
             document.getElementById('postmsg').remove();
             document.getElementById('postbutton').remove();
@@ -345,8 +353,9 @@
                     <h2 class="usertest"><%=post[0]['user']%></h2>
                     <div class="postcontents"><%= post[0]['postcontent'] %></div>
                     <p id="bin"><%=post[0]['filled']%></p>
+                    <p id="postId" name="postId"><%=post[0]['id']%></p>
                 </div>
-                <form id="Form" class="centered" method="post" action="http://localhost:3000/createpost" name="form">
+                <form id="Form" class="centered" method="post" action="http://localhost:3000/createpost-<%=post[0]['id']%>" name="form">
 
                     <input type="text" id="postmsg" name="postmsg" class="textBoxSize">
                     <input id="postbutton" type="button" class="button button2" value="reply" onclick="formCall(document.getElementById('postmsg').value, 'postCont')">
@@ -354,12 +363,12 @@
                         var test = '<%=username%>';
                     </script>
                 </form>
-                <form id="likePost" class="likePost" method="post" action="http://localhost:3000/like">
+                <form id="likePost" class="likePost" method="post" action="http://localhost:3000/like-<%=post[0]['id']%>">
                     <input id="likePost" type="submit" class="button button2" value="Upvote">
 
                 </form>
 
-                <form id="dislikePost" class="likePost" method="post" action="http://localhost:3000/dislike">
+                <form id="dislikePost" class="likePost" method="post" action="http://localhost:3000/dislike-<%=post[0]['id']%>">
                     <input id="dislikePost" type="submit" class="button button2" value="Downvote">
                     <a id="dislikePost"> Upvotes: <%=post[0]['likes']%> Downvotes: <%=post[0]['dislikes']%> </a>
                 </form>
@@ -370,12 +379,15 @@
 
                 <p>
                 <div id="cont" class="content">
-                    <div class="content1">
+                    <div id="content1" class="content1">
                         <h3><a><%= Comments[0]['user']%></a></h3>
                         <p><%= Comments[0]['commentcontent']%></p>
 
                     </div>
                     <% for (i = 1; i < Comments.length; i++){ %>
+                    <%if(i == 1){%>
+                        <div class="content3"> <%=Comments[0]['user']%></div>
+                    <%}%>
                         <div class="content2">
                             <h3><a><%= Comments[i]['user']%></a></h3>
                             <p><%= Comments[i]['commentcontent']%></p>
@@ -384,7 +396,7 @@
 
                 </div>
                 </p>
-                <form id="myForm" class="centered" method="post" action="http://localhost:3000/comment">
+                <form id="myForm" class="centered" method="post" action="http://localhost:3000/comment-<%=post[0]['id']%>">
                     <input type="text" id="msg" name="msg" class="textBoxSize">
                     <input type="submit" class="button button2" value="reply">
                     <script>
