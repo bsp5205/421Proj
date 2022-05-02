@@ -53,8 +53,8 @@ app.post('/login', (req, res) => {
                             if (results.length > 0) {
                                 session = req.session;
                                 session.userid = user;
-                                con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, getForums, fields) {
-                                    con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, getFollowed, fields) {
+                                con.query('SELECT * FROM followed_forums WHERE user = ?', [user], function(error, getForums, fields) {
+                                    con.query('SELECT * FROM followed_users WHERE user = ?', [user], function(error, getFollowed, fields) {
                                         res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: test, forums: getForums, followed: getFollowed});
                                     })
                                 })
@@ -137,8 +137,8 @@ app.get("/profile", (req, res) => {
     session=req.session;
     if(session.userid){
         con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, test3, fields) {
-            con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, getForums, fields) {
-                con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, getFollowed, fields) {
+            con.query('SELECT * FROM followed_forums WHERE user = ?', [user], function(error, getForums, fields) {
+                con.query('SELECT * FROM followed_users WHERE user = ?', [user], function(error, getFollowed, fields) {
                     res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: test3, forums: getForums, followed: getFollowed});
                 })
             })
@@ -180,7 +180,10 @@ app.get("/post-:id", (req, res) => {
                 console.log("getPOST: " + getPost);
                 con.query('SELECT * FROM Comments WHERE Postid = ?',[x], function(err, Comments){
                     console.log("comment user: " + Comments[0]['user'])
-                    res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments});
+                    con.query('SELECT * FROM followed_forums WHERE user = ?', [user], function(error, getForums, fields) {
+                        res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments, followedForums:getForums});
+                    })
+
                     con.query('UPDATE posts SET hits = hits + 1 WHERE id = ?', [subID])
                 });
             }); //               var x = posts[0]['id'];
@@ -201,7 +204,9 @@ app.get("/subforum-:title", (req, res) => {
     var subID = req.params.title;
     con.query('SELECT * FROM subforums WHERE title = ?', [subID], function(error, subforum, fields) {
         con.query('SELECT * FROM posts WHERE subforumID = ?', [subforum[0]['id']], function(error, posts, fields) {
-            res.render("subforum.ejs", {title: "FUBAR | " + subforum[0]['title'], username: user, data: subforum, post: posts});
+            con.query('SELECT * FROM followed_forums WHERE user = ?', [user], function(error, getForums, fields) {
+                res.render("subforum.ejs", {title: "FUBAR | " + subforum[0]['title'], username: user, data: subforum, post: posts, followedForums:getForums});
+            })
         })
     })
 });
@@ -248,10 +253,9 @@ app.post('/update', (req, res) =>{
     //refresh profile page to show updated info
 
     con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, test3, fields) {
-        con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, getForums, fields) {
-            con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, getFollowed, fields) {
+        con.query('SELECT * FROM followed_forums WHERE user = ?', [user], function(error, getForums, fields) {
+            con.query('SELECT * FROM followed_users WHERE user = ?', [user], function(error, getFollowed, fields) {
                 res.render('profile.ejs', {title: 'FUBAR | ' + user, username: user, data: test3, forums: getForums, followed: getFollowed});
-                console.log('Login Success')
             })
         })
     })
@@ -268,8 +272,11 @@ app.post('/createpost-:id', (req,res)=>{
             con.query('SELECT * FROM posts WHERE id = ?', [x], function (err, getPost) {//query posts and comments to reload the page
                 console.log("getPOST: " + getPost);
                 con.query('SELECT * FROM Comments WHERE Postid = ?', [getPost[0]['id']], function (err, Comments) {
-                    res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments});
+                    con.query('SELECT * FROM followed_forums WHERE user = ?', [user], function(error, getForums, fields) {
+                        res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments, followedForums:getForums});
+                    })
                 });
+
             });
 
             if (err) throw err;
@@ -290,8 +297,11 @@ app.post('/like-:id', (req,res)=>{
                 con.query('SELECT * FROM posts WHERE id = ?', [subID], function (err, getPost) {//query posts and comments to reload the page
                     console.log("getPOST: " + getPost);
                     con.query('SELECT * FROM Comments WHERE Postid = ?', [getPost[0]['id']], function (err, Comments) {
-                        res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments});
+                        con.query('SELECT * FROM followed_forums WHERE user = ?', [user], function(error, getForums, fields) {
+                            res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments, followedForums:getForums});
+                        })
                     });
+
                 });
                 if (err) throw err;
                 console.log(result.affectedRows + "record(s) updated");
@@ -311,7 +321,9 @@ app.post('/dislike-:id', (req,res)=>{//same as the like endpoint but it counts d
             con.query('SELECT * FROM posts WHERE id = ?',[subID], function(err, getPost) {
                 console.log("getPOST: " + getPost);
                 con.query('SELECT * FROM Comments WHERE Postid = ?',[getPost[0]['id']], function(err, Comments){
-                    res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments});
+                    con.query('SELECT * FROM followed_forums WHERE user = ?', [user], function(error, getForums, fields) {
+                        res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments, followedForums:getForums});
+                    })
                 });
             });
             if(err) throw err;
@@ -328,7 +340,9 @@ app.post('/comment-:id', (req,res)=>{
         con.query('SELECT * FROM posts WHERE id = ?',[subID], function(err, getPost) {//query posts and comments to reload the page
             con.query('SELECT * FROM Comments WHERE Postid = ?',[subID], function(err, getComment) {
                 console.log("getPOST: " + getPost);
-                res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: getComment});
+                con.query('SELECT * FROM followed_forums WHERE user = ?', [user], function(error, getForums, fields) {
+                    res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments, followedForums:getForums});
+                })
             });
         });
         if (err) throw err;
