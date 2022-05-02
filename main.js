@@ -168,17 +168,22 @@ app.get("/signup", (req,res) =>{
 
 app.get("/post-:id", (req, res) => {
     session=req.session;
+    var pid = req.body.postId;
+    console.log("post ID = " + pid);
     var subID = req.params.id;
     if(session.userid){
         con.query('SELECT * from posts WHERE id = ?', [subID], function(error, posts, fields){
-            con.query('SELECT * FROM posts WHERE id = ?',[1], function(err, getPost) {
+            var x = posts[0]['id'];
+            console.log("postId " +  x);
+            con.query('SELECT * FROM posts WHERE id = ?',[x], function(err, getPost) {
                 console.log("getPOST: " + getPost);
-                con.query('SELECT * FROM Comments WHERE Postid = ?',[getPost[0]['id']], function(err, Comments){
+                con.query('SELECT * FROM Comments WHERE Postid = ?',[x], function(err, Comments){
+                    console.log("comment user: " + Comments[0]['user'])
                     res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments});
                     con.query('UPDATE posts SET hits = hits + 1 WHERE id = ?', [subID])
                 });
-            });                var x = posts[0]['id'];
-                console.log(x);
+            }); //               var x = posts[0]['id'];
+                //console.log(x);
 
         })
 
@@ -252,48 +257,57 @@ app.post('/update', (req, res) =>{
 
 });
 
-app.post('/createpost', (req,res)=>{
+app.post('/createpost-:id', (req,res)=>{
     console.log("making post");
-    let newPost = req.body.postmsg;
-    con.query("UPDATE posts SET postcontent = ?, user = ?, filled =? WHERE id = ?", [newPost,user, 1, 1], function (err, result) {
-        con.query('SELECT * FROM posts WHERE id = ?',[1], function(err, getPost) {
-            console.log("getPOST: " + getPost);
-            con.query('SELECT * FROM Comments WHERE Postid = ?',[getPost[0]['id']], function(err, Comments){
-                res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments});
-            });
-        });
-        if (err) throw err;
-        console.log(result.affectedRows + "record(s) updated");
-    });
-});
-
-app.post('/like', (req,res)=>{
-    console.log("likes your post");
-    con.query("SELECT * FROM posts WHERE id = ?", [1], function(err,result1){
-        console.log(result1[0]['likes']);
-        let x = result1[0]['likes'] + 1;
-        con.query("UPDATE posts SET likes = ? WHERE id = ?", [x , 1], function(err,result){
-            console.log("result" + result);
-            con.query('SELECT * FROM posts WHERE id = ?',[1], function(err, getPost) {
+    var subID = req.params.id; //get the post id from url
+    let newPost = req.body.postmsg; //get the post content from the text bar
+    con.query('SELECT * from posts WHERE id = ?', [subID], function(err, posts, fields) {//query for the post with this id
+        var x = posts[0]['id'];
+        con.query("UPDATE posts SET postcontent = ?, user = ?, filled =? WHERE id = ?", [newPost, user, 1, subID], function (err, result) {//update the table
+            con.query('SELECT * FROM posts WHERE id = ?', [x], function (err, getPost) {//query posts and comments to reload the page
                 console.log("getPOST: " + getPost);
-                con.query('SELECT * FROM Comments WHERE Postid = ?',[getPost[0]['id']], function(err, Comments){
+                con.query('SELECT * FROM Comments WHERE Postid = ?', [getPost[0]['id']], function (err, Comments) {
                     res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments});
                 });
             });
-            if(err) throw err;
+
+            if (err) throw err;
             console.log(result.affectedRows + "record(s) updated");
         });
     });
 });
 
-app.post('/dislike', (req,res)=>{
+app.post('/like-:id', (req,res)=>{
+    console.log("likes your post");
+    var subID = req.params.id//get the id from the url
+    con.query('SELECT * from posts WHERE id = ?', [subID], function(err, posts, fields){
+        con.query("SELECT * FROM posts WHERE id = ?", [subID], function(err,result1) {//query to get the number of likes on the post
+            console.log(result1[0]['likes']);
+            let x = result1[0]['likes'] + 1;//calculate new like total
+            con.query("UPDATE posts SET likes = ? WHERE id = ?", [x, subID], function (err, result) {//update the likes
+                console.log("result" + result);
+                con.query('SELECT * FROM posts WHERE id = ?', [subID], function (err, getPost) {//query posts and comments to reload the page
+                    console.log("getPOST: " + getPost);
+                    con.query('SELECT * FROM Comments WHERE Postid = ?', [getPost[0]['id']], function (err, Comments) {
+                        res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments});
+                    });
+                });
+                if (err) throw err;
+                console.log(result.affectedRows + "record(s) updated");
+            });
+        });
+    });
+});
+
+app.post('/dislike-:id', (req,res)=>{//same as the like endpoint but it counts downvotes now
     console.log("dislikes your post");
-    con.query("SELECT * FROM posts WHERE id = ?", [1], function(err,result1){
+    var subID = req.params.id
+    con.query("SELECT * FROM posts WHERE id = ?", [subID], function(err,result1){
         console.log(result1[0]['dislikes']);
         let x = result1[0]['dislikes'] + 1;
-        con.query("UPDATE posts SET dislikes = ? WHERE id = ?", [x , 1], function(err,result){
+        con.query("UPDATE posts SET dislikes = ? WHERE id = ?", [x , subID], function(err,result){
             console.log("result" + result);
-            con.query('SELECT * FROM posts WHERE id = ?',[1], function(err, getPost) {
+            con.query('SELECT * FROM posts WHERE id = ?',[subID], function(err, getPost) {
                 console.log("getPOST: " + getPost);
                 con.query('SELECT * FROM Comments WHERE Postid = ?',[getPost[0]['id']], function(err, Comments){
                     res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments});
@@ -305,12 +319,13 @@ app.post('/dislike', (req,res)=>{
     });
 });
 
-app.post('/comment', (req,res)=>{
+app.post('/comment-:id', (req,res)=>{
     console.log("making post");
-    let newPost = req.body.msg;
-    con.query("INSERT INTO Comments (Postid, user, commentcontent, filled) VALUES (?, ?, ?, ?)",[1, user, newPost, 1], function (err, result) {
-        con.query('SELECT * FROM posts WHERE id = ?',[1], function(err, getPost) {
-            con.query('SELECT * FROM Comments WHERE Postid = ?',[1], function(err, getComment) {
+    var subID = req.params.id//get post id from url
+    let newPost = req.body.msg;//get content from text box
+    con.query("INSERT INTO Comments (Postid, user, commentcontent, filled) VALUES (?, ?, ?, ?)",[subID, user, newPost, 1], function (err, result) {//insert the comment into the post with the taken id
+        con.query('SELECT * FROM posts WHERE id = ?',[subID], function(err, getPost) {//query posts and comments to reload the page
+            con.query('SELECT * FROM Comments WHERE Postid = ?',[subID], function(err, getComment) {
                 console.log("getPOST: " + getPost);
                 res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: getComment});
             });
