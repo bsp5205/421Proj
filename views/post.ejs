@@ -192,15 +192,22 @@
         text-indent: 4%;
     }
 
+
     .content1{
         border-style: solid;
-        border-color: black;
+        border-color: transparent;
     }
 
     .content2{
         border-style: solid;
         border-color: black;
         border-top-color: transparent;
+    }
+
+    .content3{
+        border-style: solid;
+        border-color: transparent;
+        border-top-color: black;
     }
 
     .likePost{
@@ -220,6 +227,7 @@
 
     function elementDelete(){
         console.log("deletes your element");
+        document.getElementById('content1').remove();
         if( document.getElementById('bin').innerHTML == 1){
             document.getElementById('postmsg').remove();
             document.getElementById('postbutton').remove();
@@ -332,34 +340,36 @@
 </script>
 <body onload="elementDelete();">
 <div class="grid-container">
+    <!-- Ad box it just contains a button for the ad to be in -->
     <div class="item2">
         <div class="img-size">
             <button class="adBlock" onclick="window.location.href = 'https://playvalorant.com/en-us/?gclid=CjwKCAjw6dmSBhBkEiwA_W-EoAgh1lHdzMCyQY7omW-rRzAwNPWDytHjm-OElMhJnrFta_ZJuq1BthoCICwQAvD_BwE&gclsrc=aw.ds'"></button>
         </div>
     </div>
     <div class="item3">
+        <!--Holds post title, user that posted, and upvotes and downvotes-->
         <div class="main">
             <div class="post">
-                <h1><%= post[0]['title'] %></h1>
+                <h1><%= post[0]['title'] %></h1><!-- get the post's title for the top -->
                 <div class="postcontent" id="postCont">
-                    <h2 class="usertest"><%=post[0]['user']%></h2>
-                    <div class="postcontents"><%= post[0]['postcontent'] %></div>
-                    <p id="bin"><%=post[0]['filled']%></p>
+                    <h2 class="usertest"><%=post[0]['user']%></h2> <!-- get the user that posted it -->
+                    <div class="postcontents"><%= post[0]['postcontent'] %></div> <!--get the post's content -->
+                    <p id="bin"><%=post[0]['filled']%></p> <!-- get filled so the ejs page can figure out whether or not to keep the text box and button-->
                 </div>
-                <form id="Form" class="centered" method="post" action="http://localhost:3000/createpost" name="form">
+                <form id="Form" class="centered" method="post" action="http://localhost:3000/createpost-<%=post[0]['id']%>" name="form"><!-- form to call for making a post-->
 
                     <input type="text" id="postmsg" name="postmsg" class="textBoxSize">
-                    <input id="postbutton" type="button" class="button button2" value="reply" onclick="formCall(document.getElementById('postmsg').value, 'postCont')">
+                    <input id="postbutton" type="submit" class="button button2" value="reply">
                     <script>
                         var test = '<%=username%>';
                     </script>
                 </form>
-                <form id="likePost" class="likePost" method="post" action="http://localhost:3000/like">
+                <form id="likePost" class="likePost" method="post" action="http://localhost:3000/like-<%=post[0]['id']%>"> <!-- form to call the like endpoint-->
                     <input id="likePost" type="submit" class="button button2" value="Upvote">
 
                 </form>
 
-                <form id="dislikePost" class="likePost" method="post" action="http://localhost:3000/dislike">
+                <form id="dislikePost" class="likePost" method="post" action="http://localhost:3000/dislike-<%=post[0]['id']%>"><!-- form to call the dislike endpoint-->
                     <input id="dislikePost" type="submit" class="button button2" value="Downvote">
                     <a id="dislikePost"> Upvotes: <%=post[0]['likes']%> Downvotes: <%=post[0]['dislikes']%> </a>
                 </form>
@@ -367,15 +377,18 @@
             </div>
             <p>Comments</p>
             <div class="comment">
-
+                <!-- basically the same as the posts thing but now it is just for submitting comments no likes-->
                 <p>
                 <div id="cont" class="content">
-                    <div class="content1">
-                        <h3><a><%= Comments[0]['user']%></a></h3>
-                        <p><%= Comments[0]['commentcontent']%></p>
+                    <div id="content1" class="content1">
+                        <h3><a><%= Comments[0]['user']%></a></h3><!-- get username of poster both of these will be null since there needs to be an empty comment for the page to load-->
+                        <p><%= Comments[0]['commentcontent']%></p><!-- get the post content-->
 
                     </div>
-                    <% for (i = 1; i < Comments.length; i++){ %>
+                    <% for (i = 1; i < Comments.length; i++){ %><!-- loop that posts the comments and sets borders -->
+                    <%if(i == 1){%>
+                        <div class="content3"> <%=Comments[0]['user']%></div>
+                    <%}%>
                         <div class="content2">
                             <h3><a><%= Comments[i]['user']%></a></h3>
                             <p><%= Comments[i]['commentcontent']%></p>
@@ -384,7 +397,7 @@
 
                 </div>
                 </p>
-                <form id="myForm" class="centered" method="post" action="http://localhost:3000/comment">
+                <form id="myForm" class="centered" method="post" action="http://localhost:3000/comment-<%=post[0]['id']%>"><!-- form to get comment info for endpoints -->
                     <input type="text" id="msg" name="msg" class="textBoxSize">
                     <input type="submit" class="button button2" value="reply">
                     <script>
@@ -395,6 +408,7 @@
         </div>
 
     </div>
+    <!-- sidebar for trending or followed -->
     <div class="item4">
         <div class="favorites">
             <p>Title 1</p>

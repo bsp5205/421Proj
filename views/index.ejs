@@ -160,10 +160,9 @@
 <div class="grid-container">
     <div class="item1 centered">
         <h3>Trending Posts</h3>
-                <% for (i = 4; i >= 0; i--){ %>
-                    <% j = Math.floor(Math.random() * post.length)%>
+                <% for (i = 0; i < 5; i++){ %>
                         <div class="trending">
-                            <button class="blockTrending" onclick="window.location.href = 'http://localhost:3000/post-<%= post[j]['id'] %>'"><%= post[j]['title'] %></button>
+                            <button class="blockTrending" onclick="window.location.href = 'http://localhost:3000/post-<%= post[i]['id'] %>'"><%= post[i]['title'] %></title></button>
                         </div>
                 <% } %>
     </div>
@@ -186,7 +185,7 @@
     </div>
     <div class="item4">
         <% if (username){%>
-            <% if (followedForums[0]['forumCount']){%>
+            <% if (followedForums[0]['forumCount'] > 0){%>
                 <label>Favorites</label>
                 <div class="favorites">
                     <% if (followedForums[0]['forum1']){%>
