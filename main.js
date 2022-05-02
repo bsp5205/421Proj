@@ -341,7 +341,7 @@ app.post('/comment-:id', (req,res)=>{
             con.query('SELECT * FROM Comments WHERE Postid = ?',[subID], function(err, getComment) {
                 console.log("getPOST: " + getPost);
                 con.query('SELECT * FROM followed_forums WHERE user = ?', [user], function(error, getForums, fields) {
-                    res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments, followedForums:getForums});
+                    res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: getComment, followedForums:getForums});
                 })
             });
         });
