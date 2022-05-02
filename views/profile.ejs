@@ -73,7 +73,6 @@
         text-decoration: none;
         display: inline;
         font-size: 16px;
-        margin: 4px 2px;
         cursor: pointer;
         -webkit-transition-duration: 0.4s; /* Safari */
         transition-duration: 0.4s;
@@ -637,32 +636,21 @@
                                     <!-- inserted buttons using js script -->
                                     <% if (forums[0]['forumCount']){%>
                                         <% if (forums[0]['forum1']){%>
-                                            <%= forums[0]['forum1'] %>
-                                        <% }else{%>
-                                            <div class="buttonDiv">
-                                                <button class="button button2"></button>
-                                            </div>
+                                            <p><%=forums[0]['forum1']%></p>
+                                            <button class="blockRight button button2" style='margin-top: -4%' onclick="window.location.href = 'http://localhost:3000/subforum-<%=forums[0]['forum1']%>'"><%=forums[0]['forum1']%></button>
                                         <%}%>
                                         <% if (forums[0]['forum2']){%>
-                                            <%= forums[0]['forum2'] %>
-                                        <% }else{%>
-                                            <div class="buttonDiv">
-                                                <button class="button button2"></button>
-                                            </div>
+                                            <p><%=forums[0]['forum2']%></p>
+                                            <button class="blockRight button button2" style='margin-top: -4%' onclick="window.location.href = 'http://localhost:3000/subforum-<%=forums[0]['forum2']%>'"><%=forums[0]['forum2']%></button>
+
                                         <%}%>
                                         <% if (forums[0]['forum3']){%>
-                                            <%= forums[0]['forum3'] %>
-                                        <% }else{%>
-                                            <div class="buttonDiv">
-                                                <button class="button button2"></button>
-                                            </div>
+                                            <p><%=forums[0]['forum3']%></p>
+                                            <button class="blockRight button button2" style='margin-top: -4%' onclick="window.location.href = 'http://localhost:3000/subforum-<%=forums[0]['forum3']%>'"><%=forums[0]['forum3']%></button>
                                         <%}%>
-                                        <% if (forums[0]['forum4']){%>
-                                            <%= forums[0]['forum4'] %>
-                                        <% }else{%>
-                                            <div class="buttonDiv">
-                                                <button class="button button2"></button>
-                                            </div>
+                                            <% if (forums[0]['forum4']){%>
+                                            <p><%=forums[0]['forum4']%></p>
+                                            <button class="blockRight button button2" style='margin-top: -4%' onclick="window.location.href = 'http://localhost:3000/subforum-<%=forums[0]['forum4']%>'"><%=forums[0]['forum4']%></button>
                                         <%}%>
                                     <%}else{%>
                                         <p>No followed forums</p>
@@ -676,38 +664,22 @@
                             <div class="card-body">
                                 <h6 class="d-flex align-items-center mb-3">Followed Users</h6>
                                 <div id="users">
-                                    <% if (followed[0]['forumCount']){%>
-                                        <% if (followed[0]['user1']){%>
-                                            <%= followed[0]['user1'] %>
-                                        <% }else{%>
-                                            <div class="buttonDiv">
-                                                <button class="button button2"></button>
-                                            </div>
+                                        <% if (followed[0]['userCount'] > 0){%>
+                                            <% if (followed[0]['user1']){%>
+                                                <%= followed[0]['user1'] %>
+                                            <%}%>
+                                                <% if (followed[0]['user2']){%>
+                                                    <%= followed[0]['user2'] %>
+                                                <%}%>
+                                                <% if (followed[0]['user3']){%>
+                                                    <%= followed[0]['user3'] %>
+                                                <%}%>
+                                                <% if (followed[0]['user4']){%>
+                                                    <%= followed[0]['user4'] %>
+                                                <%}%>
+                                        <%}else{%>
+                                            <p>No followed users</p>
                                         <%}%>
-                                        <% if (followed[0]['user2']){%>
-                                            <%= followed[0]['user2'] %>
-                                        <% }else{%>
-                                            <div class="buttonDiv">
-                                                <button class="button button2"></button>
-                                            </div>
-                                        <%}%>
-                                        <% if (followed[0]['user3']){%>
-                                            <%= followed[0]['user3'] %>
-                                        <% }else{%>
-                                            <div class="buttonDiv">
-                                                <button class="button button2"></button>
-                                            </div>
-                                        <%}%>
-                                        <% if (followed[0]['user4']){%>
-                                            <%= followed[0]['user4'] %>
-                                        <% }else{%>
-                                            <div class="buttonDiv">
-                                                <button class="button button2"></button>
-                                            </div>
-                                        <%}%>
-                                    <%}else{%>
-                                        <p>No followed users</p>
-                                    <%}%>
                                 </div>
                             </div>
                         </div>

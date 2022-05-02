@@ -185,22 +185,39 @@
 
     </div>
     <div class="item4">
-        <div class="favorites">
-            <p>Title 1</p>
-            <button class="blockRight">Block Button</button>
-        </div>
-        <div class="favorites">
-            <p>Title 2</p>
-            <button class="blockRight">Block Button</button>
-        </div>
-        <div class="favorites">
-            <p>Title 3</p>
-            <button class="blockRight">Block Button</button>
-        </div>
-        <div class="favorites">
-            <p>Title 4</p>
-            <button class="blockRight">Block Button</button>
-        </div>
+        <% if (username){%>
+            <% if (followedForums[0]['forumCount'] > 0){%>
+                <label>Favorites</label>
+                <div class="favorites">
+                    <% if (followedForums[0]['forum1']){%>
+                    <p><%=followedForums[0]['forum1']%></p>
+                    <button class="blockRight" onclick="window.location.href = 'http://localhost:3000/subforum-<%=followedForums[0]['forum1']%>'"><%=followedForums[0]['forum1']%></button>
+                    <% } %>
+                </div>
+                <div class="favorites">
+                    <% if (followedForums[0]['forum2']){%>
+                    <p><%=followedForums[0]['forum2']%></p>
+                    <button class="blockRight" onclick="window.location.href = 'http://localhost:3000/subforum-<%=followedForums[0]['forum2']%>'"><%=followedForums[0]['forum2']%></button>
+                    <% } %>
+                </div>
+                <div class="favorites">
+                    <% if (followedForums[0]['forum3']){%>
+                    <p><%=followedForums[0]['forum3']%></p>
+                    <button class="blockRight" onclick="window.location.href = 'http://localhost:3000/subforum-<%=followedForums[0]['forum3']%>'"><%=followedForums[0]['forum3']%></button>
+                    <% } %>
+                </div>
+                <div class="favorites">
+                    <% if (followedForums[0]['forum4']){%>
+                    <p><%=followedForums[0]['forum4']%></p>
+                    <button class="blockRight" onclick="window.location.href = 'http://localhost:3000/subforum-<%=followedForums[0]['forum4']%>'"><%=followedForums[0]['forum4']%></button>
+                    <% } %>
+                </div>
+            <% } else { %>
+                <p>No followed Forums</p>
+            <% } %>
+        <%}else{%>
+            <p>Login to view followed forums</p>
+        <%}%>
     </div>
 
 
