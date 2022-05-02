@@ -103,8 +103,9 @@ app.post('/signup', (req, res) => {
                     bcrypt.hash(pass, 10, function(err, hash) {
                         if (err) throw err
                         con.query('INSERT INTO login (email, user, pass) VALUES (?,?,?)', [email, user, hash])
-                        con.query("INSERT INTO Profile_Info (user, name, email, phone, country, github, twitter, insta, facebook, profilePicLink, bio) VALUES (? , 'Name', ?, '123-456-7890', 'country', 'github', 'twitter', 'instagram', 'facebook', './images/cypher_pic.jpg', 'User has no bio yet.')", [user, email])
-                        
+                        con.query("INSERT INTO Profile_Info (user, name, email, phone, country, profilePicLink, bio) VALUES (? , 'Name', ?, 'No phone number', 'country', './images/Default.png', 'User has no bio yet.')", [user, email])
+                        con.query("INSERT INTO followed_forums (user, forumCount) VALUES (?, ?)",[user, 0])
+                        con.query("INSERT INTO followed_users (user, userCount) VALUES (?, ?)",[user, 0])
                     });
 
                     // Direct them to login
