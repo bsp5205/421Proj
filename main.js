@@ -121,7 +121,9 @@ app.get("/", function(req,res){
     session=req.session;
     con.query('SELECT * FROM posts', function(error, posts, fields){
         con.query('SELECT * FROM followed_forums WHERE user = ?', [user], function(error, getFollowedForums, fields) {
-            res.render("index", {title:"FUBAR | Home", message:"This is a message", username: user, post: posts, followedForums: getFollowedForums});
+            con.query('SELECT * FROM posts ORDER BY hits LIMIT 5', function(error, trending) {
+                res.render("index", {title:"FUBAR | Home", message:"This is a message", username: user, post: posts, followedForums: getFollowedForums, trending: trending});
+            })
         })
     })
 });
@@ -173,6 +175,7 @@ app.get("/post-:id", (req, res) => {
                 console.log("getPOST: " + getPost);
                 con.query('SELECT * FROM Comments WHERE Postid = ?',[getPost[0]['id']], function(err, Comments){
                     res.render('post.ejs', {username: user, title: 'post', post: getPost, Comments: Comments});
+                    con.query('UPDATE posts SET hits = hits + 1 WHERE id = ?', [subID])
                 });
             });                var x = posts[0]['id'];
                 console.log(x);
