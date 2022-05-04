@@ -152,11 +152,14 @@ var myPath;
 app.get("/DM", (req, res) => {
     myPath = "./images/Default.png";
     session=req.session;
-    if(session.userid){
-        res.render("DM.ejs", {title: "FUBAR | Login", username: user, path: myPath, username: user});
-    }else{
-        res.render("login.ejs", {title: "FUBAR | Login", message:""});
-    }
+    con.query('SELECT * FROM Profile_Info WHERE user = ?', [user], function(error, DMResults, fields){
+        if(session.userid){
+            res.render("DM.ejs", {title: "FUBAR | Login", username: user, DMData: DMResults});
+        }else{
+            res.render("login.ejs", {title: "FUBAR | Login", message:""});
+        }
+    })
+
 });
 
 app.get("/login-failed", (req, res) => {

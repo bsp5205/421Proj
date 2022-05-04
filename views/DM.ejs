@@ -46,6 +46,7 @@
         height: 30px;
         width: 30px;
         padding-right: 5px;
+        object-fit: cover;
     }
     .msgCont{
         display: flex;
@@ -113,10 +114,8 @@
             <input type="submit" class="buttonSize" value="Send" onclick="postMessage(document.getElementById('msg').value)">
             <script>
                 var test = '<%=username%>';
-                var test2 = '<%=path%>';
+                var test2 = '<%=DMData[0]['profilePicLink']%>';
             </script>
         </form>
     </footer>
 </div>
-<div data-pym-src="https://www.jdoodle.com/embed/v0/4HTx"></div>
-<script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"></script>
